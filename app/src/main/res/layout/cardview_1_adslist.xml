@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="1dp"
+        >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:id="@+id/ad_image"
+                    android:src="@mipmap/ic_launcher_round"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <HorizontalScrollView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:id="@+id/hor_scroll_bar"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollHorizontally="true"
+                            android:hint="name"
+                            android:textSize="25dp"
+                            android:id="@+id/ad_title"
+                            />
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ad_location"
+                        android:hint="ad_location"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ad_rental_option"
+                        android:hint="rental option"/>
+                </LinearLayout>
+            </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kirayepay.kirayepay101.Fab.OnFabClickedActivity">
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent"
+        android:background="@color/secendory"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:id="@+id/post_ads"
+            app:srcCompat="@drawable/post_ads_icon"
+            android:background="?attr/selectableItemBackground"
+        />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent"
+        android:background="@color/com_facebook_blue"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:id="@+id/post_requirements"
+            app:srcCompat="@drawable/post_req_ads_icon2"
+            />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "797282716235",
+    "project_id": "kirayepay101"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797282716235:android:271016ba196342fa",
+        "android_client_info": {
+          "package_name": "com.kirayepay.kirayepay101"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797282716235-qqbvlp1f0rm7na5bc9483lcoem5vr4e3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kirayepay.kirayepay101",
+            "certificate_hash": "9fe466b3b16faf56154c728d552e1bb9e64e6ce2"
+          }
+        },
+        {
+          "client_id": "797282716235-u480371v1auneigil7db0gv8ha3ilmqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWSwDmVSqu4ZquA9uBmgL-Au_X_L1x6UQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
