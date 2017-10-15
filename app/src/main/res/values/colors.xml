@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#163762</color>
-    <color name="colorPrimaryDark">#163762</color>
+    <color name="colorPrimary">#D50000</color>
+    <color name="colorPrimaryDark">#D50000</color>
     <color name="colorAccent">#04112d</color>
     <color name="secendory">#e60d0d</color>
+    <color name="toolbarBackground">#D50000</color>
+    <color name="toobarIcons">#FFFFFF</color>
+    <color name="tabLayoutBackground">#f52626</color>
+    <color name="tabLayoutIcons">#FFFFFF</color>
+    <color name="bottomNavigation">#e1dddd</color>
+    <color name="bottomNavigationIcons">#D50000</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="mainBackgorund">#e1dddd</color>
+    <color name="cardTextColor">#3d3c3c</color>
+    <color name="fabColor">#183862</color>
+    <color name="kp_red">#E92D39</color>
+    <color name="kp_blue">#145ea7</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="bottomsheetBackgrond">#fcced0</color>
 
+
+    <!-- LightRed = f52626
+     DarkRed = D50000
+     MessyWhite = e1dddd
+     White = FFFFFF
+     Blue = 183862
+     LightBlue = 2196F3
+ -->
 </resources>

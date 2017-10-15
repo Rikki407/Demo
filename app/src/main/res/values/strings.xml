@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KirayePay101</string>
+    <string name="app_name">KirayePay</string>
 
     <string name="facebook_app_id">248881788956936</string>
     <string name="fb_login_protocol_scheme">fb248881788956936</string>
@@ -14,97 +14,125 @@
     <string name="title_post_requirements">Post Requirements</string>
     <string name="title_search">Search</string>
     <string name="title_menu">Menu</string>
-
+    <string name="Rs">\u20B9</string>
+    <string name="disclaimer_one">KirayePay is just a way to connect the lenders and borrowers.</string>
+    <string name="disclaimer_two">The transactions and deals happening between the two parties are on mutual understanding of both.</string>
+    <string name="disclaimer_three">The transactions and deals happening between the two parties are on mutual understanding of both.</string>
+    <string name="privacy_policy">This privacy policy describes how we handle your personal information.
+        We collect, use, and share personal information to help the KirayePay website work and to keep it safe (details below).
+        In formal terms, KirayePay is the "data controller" of your personal information.</string>
+    <string name="collection">Information posted on KirayePay is obviously publicly available. Our servers are located throughout
+        the country. Therefore,if you choose to provide us with personal information, you are consenting to the transfer and storage
+        of that information on our servers.</string>
+    <string name="disclosure">
+1. All information contained by KirayePay is treated as strictly confidential and KirayePay does not and will not disclose or share such confidential information to / with any external organization.\n
+2. The user\'s privacy is very important to us. We do not and shall not at any point in time rent user\'s personal information to third parties without user\'s explicit consent.\n
+3. We may be required from time to time to disclose user\'s personal information to Governmental or law enforcing agencies or our regulators, but we will only do so under proper authority.\n
+4. KirayePay also reserves the right to make use of the personal information in any investigation or judicial process relating to fraud on account of such transactions during the period KirayePay retains such information.\n
+5. We may also disclose personal information to enforce our policies, respond to claims that a posting or other content violates other\'s rights, or protects anyone\'s rights, property or safety.\n
+6. We may also share personal information with:\n
+         - Corporate affiliates who help detect or prevent potentially illegal acts and provide joint services (Our corporate affiliates will market only to users who ask them to).\n
+         - Service providers who help with our business operations.\n</string>
+    <string name="using_info">You may use personal information gathered from KirayePay only to follow up with another user about a specific posting, not to send spam/ phising or
+        collect personal information from someone who hasn\'t agreed to that.</string>
+    <string name="acc_mod_del">You can see, modify or erase your personal information by reviewing your posting or account status page. Contact customer support at care@kirayepay.com to
+        review any personal information we store that is not available on KirayePay. There may be a charge associated with such requests but these will not exceed the amounts permitted by
+        law. We delete personal information when we no longer need it for the purposes we described earlier. We retain personal information as permitted by law to resolve disputes, enforce
+        our policies; and prevent bad guys from coming back.</string>
+    <string name="data_sec">We use a number of mechanisms (encryption, passwords, physical security) to protect the security and integrity of your personal information against unauthorized access and
+        disclosure. Unfortunately, no data transmission over the internet can be guaranteed to be completely secure. So while we strive to protect such information, we cannot ensure or warrant the security
+        of any information you transmit to us and you do so at your own risk. Once any personal information comes into our possession, we will take reasonable steps to protect that information from misuse and
+        loss and from unauthorised access, modification or disclosure.</string>
+    <string name="confidentiality">Users who use any of the features on KirayePay agree and accept that they have been fully informed by KirayePay that the use of features may lead to publication, to all users
+        of KirayePay, of any personal information posted by them while using any specific feature on KirayePay. Users further agree that the authenticity of, and consequences from the posting by users of any personal
+        information of themselves or any other person, are the sole responsibility of the user. Users further agree and accept that the terms of the Privacy Policy will be applicable to the use of all features,
+        existing and new. However, the Users agree and accept that confidentiality of information posted on such features has been waived by the Users of such features themselves.</string>
+    <string name="general">We may update, upgrade, modify (partially or fully) this policy at any time, with updates taking effect when you next post or after 30 days, whichever is sooner. If we or our corporate
+        affiliates are involved in a merger or acquisition, we may share personal information with another company, but this policy will continue to apply. Send questions about this policy to
+        care@kirayepay.com</string>
+    <string name="tc_introduction">
+        1.1 These terms and conditions (the Terms) set out the basis on which you may browse and use our website, available at www.kirayepay.com (the Site) and any services offered through it.\n
+1.2 The Site is owned and operated by Preda Solutions Pvt. Ltd., a company registered in Delhi, India with registered no. 8026591\n
+1.3 Your use of the Site will be governed by these Terms which will be a legal contract between us and you. By browsing or using the Site and/or any services, content or materials made available through the Site you are agreeing to be legally bound by the Terms.\n
+1.4 When you list goods, property or services for rent on the Site, you are also subject to the Terms and Conditions.\n
+1.5 If you would like to contact us for any reason please do so using the following details: Email:care@kirayepay.com\n</string>
+    <string name="tc_changes">2.1 We may revise the Terms at any time by amending this page and, if we consider it to be appropriate, we will notify you of any material changes by e-mail.
+        Your use of the Site will be subject to the most recent version of the Terms available on the Site.\n
+2.2 We recommend that you read through the Terms available on the Site regularly so that you can be sure that you are aware of any changes that may apply to you.\n</string>
+    <string name="tc_rental">3.1 The Site provides a platform for owners to list goods, property or services for rent. We are not the owner or the renter of any goods, property or services listed for rent on the Site. We are not party to any contract formed between you
+        and any party for the rental of goods, property or services which is facilitated through the Site. Enforcement of any contractual obligations arising out of the completion of a transaction for rental of goods, property or services listed on the Site is the
+        responsibility of the parties to that transaction.\n</string>
+    <string name="tc_access">4.1 In order to use the Site, you must create a user account. You are solely responsible for maintaining the security of your account. You may not disclose your account password to any third party who is not authorised by you to use your
+        account. You are solely responsible for any use of your account on the Site.\n
+4.2 At all times during your use of the Site you must remain courteous to other users of the Site.\n
+4.3 Access to the Site is permitted on a temporary basis. We may suspend, withdraw, discontinue or change all or any part of the Site without notice to you.\n
+4.4 You must not misuse the Site by knowingly introducing viruses, trojans, worms, logic bombs or any other material which is malicious or technologically harmful. You must not attempt to gain unauthorised access to the Site, the server on which the Site is
+        stored or any server, computer or database connected to the Site. You must not attack the Site via a denial-of-service attack or a distributed denial-of-service attack. By breaching this provision, you would commit a criminal offence under the
+        Computer Misuse Act 1990. We will report any such breach to the relevant law enforcement authorities and we will co-operate with those authorities by disclosing your identity to them. In the event of such a breach, your right to use the Site will cease immediately.\n
+4.5 You are responsible for making all arrangements necessary for you to have access to the Site.\n</string>
+    <string name="tc_feedback">5.1 The Site contains functionality which allows you to leave feedback about those who you have transacted with through the Site.
+5.2 When using the feedback system on the Site you agree that you will not submit or upload any feedback:
+5.2.1 that is confidential, defamatory, infringing, obscene, offensive, racist, indecent, threatening or is otherwise unlawful or objectionable; or
+5.2.2 that includes any personal data if uploading it to the Site would be a breach of the Data Protection Act 1998 or any other applicable data protection or privacy legislation.
+5.3 You agree that any feedback you leave on the Site may be published on the Site and made available for viewing by other users of the Site.
+5.4 You agree not to hold us responsible for any feedback published on the Site and release us from any liability arising out of or in connection with the publication of any feedback about you on the Site.
+5.5 You may not leave feedback about yourself or attempt to manipulate the feedback system in any way.
+</string>
+    <string name="tc_payments">6.1 Payments for rentals facilitated through the Site are paid directly to the owner. Payment terms and methods of payment accepted are set by the relevant owner.We do not handle any funds for rentals facilitated through the Site.\n</string>
+    <string name="tc_insurance">7.1 You must maintain appropriate insurance to cover against loss of or damage to the goods, property or services which you borrow or lend through the Site.\n</string>
+    <string name="tc_complaints">8.1 If you are not satisfied with any transaction facilitated through the Site you should contact the applicable owner or renter in the first instance.\n
+8.2 If you are unable to resolve your issue with the applicable owner or renter, please notify us of your issue by contacting us at care@kirayepay.com or by using the contact us section on the Site.\n</string>
+    <string name="tc_uploading">9.1 As between you and us you will own any content or material (Your Content) you upload to the Site. You agree that we shall have the indefinite and worldwide right to copy, distribute, adapt and use Your Content for any purpose
+        or otherwise make it available to the public.\n
+9.2 You warrant and represent that you will not upload any content.\n
+9.2.1 that you do not own or do not have the permission of the owner or any other relevant person who may have rights in or connected to the content you are uploading; or\n
+9.2.2 that, if submitted to the Site, would infringe the intellectual property rights or any other rights of another person.\n
+9.3 We reserve the right to disclose your identity to any third party who is claiming that any of Your Content constitutes a violation of their intellectual property rights, their right to privacy, or any other legal rights.\n</string>
+    <string name="tc_notice">10.1 We do not actively monitor content that users of the Site upload directly onto the Site. We do not therefore accept any responsibility or liability for any such content on the Site.\n
+10.2 If you become aware that other members of the Site have posted content which is inaccurate, inappropriate, offensive or does not comply with any of the provisions of the Terms you may notify us by contacting us at
+        care@kirayepay.com or by using the contact us section on the Site.\n
+10.3 We have the right to remove Your Content at any time for any reason and without notice in our sole discretion.\n
+10.4 For the avoidance of doubt any decision we make in connection with the removal of any content from the Site is final and we accept no liability to you in respect of any such decision.\n</string>
+    <string name="tc_intellectual">11.1 We are the owner or the licensee of all intellectual property rights in the Site and in any material available on it.\n
+11.2 You may print off one copy, and may download extracts, of any page(s) from the Site, for your personal use provided that:\n
+11.2.1 the material shall not be reproduced or included in any other work or publication in any medium;\n
+11.2.2 the material may not be modified or altered in any way;\n
+11.2.3 the material may not be distributed or sold to any third party; and\n
+11.2.4 you do not remove any copyright or other proprietary notices contained in the material.\n
+11.3 If you copy or use any part of the Site or the content made available through it in breach of the Terms, your right to use the Site will cease immediately and you must, at our option, return or destroy any copies of the materials you have made.\n</string>
+    <string name="tc_termination">12.1 We may, in our sole discretion, terminate or suspend your access to the Site immediately without notice if you breach any of the Terms.\n
+12.2 Upon termination of the relationship between you and us, all rights and obligations under the Terms shall immediately cease and all amounts owed by you arising from your use of the Site shall immediately become due and payable.\n</string>
+    <string name="tc_data_protection">13.1 Any personal information that we collect from you as you browse and use the Site will be used in accordance with our privacy policy. To find out more about the data we collect from you and how we use it please read our Privacy Policy\n
+13.2 By accepting the Terms you also consent to our use of your personal data in accordance with our Privacy Policy.\n</string>
+    <string name="tc_links">14.1 You may link to any page of the Site, provided you do so in a way that is fair and legal and does not damage our reputation or take advantage of it. You must not establish a link in such a way as to suggest any form of association, approval
+        or endorsement on our part where none exists, nor establish a link to the Site in any website that is not owned by you.\n
+14.2 We reserve the right to withdraw linking permission without notice.\n
+14.3 Where the Site contains links to other websites and resources provided by third parties, these links are provided for your information only. We have no control over the content of those websites or resources and we are not responsible or liable for them in anyway.\n</string>
+    <string name="tc_disclaimers">15.1 We will endeavour to use reasonable care and skill in making the Site available to you.\n
+15.2 Except as expressly provided in the Terms, the Site and any products or services provided through it are provided on an "as is" basis. We do not make any representation or warranty of any kind, either express or implied (whether by common law, custom, statute or otherwise) 
+        in relation to the Site or any content, products or services provided through it including without limitation any warranties in relation to fitness for a particular purpose or in relation to quality, completeness, accuracy, reliability or non-infringement.\n
+15.3 The content on the Site is provided for general information only. It is not intended to amount to advice on which you should rely. You are advised to obtain professional or specialist advice before taking, or refraining from, any action on the basis of the content on the Site.
+        We make no representations, warranties or guarantees, whether express or implied that the content on the Site is accurate, complete or up-to-date.\n
+15.4 We do not guarantee that the Site will always be available, be uninterrupted, secure or free from bugs or viruses, nor that the Site or any products, services or content provided through it will be free from errors or omissions.\n
+15.5 Please note that some jurisdictions may not allow the exclusion of implied warranties, so some of the above exclusions may not apply to you. Please check your local laws for any restrictions of limitations regarding the exclusion of implied warranties.\n
+15.6 Nothing in the Terms is intended to disclaim or exclude any warranty or liability that cannot be disclaimed or excluded by operation of applicable law.\n</string>
+    <string name="tc_limitation">16.1 Nothing in the Terms excludes or limits our liability for death or personal injury arising from our negligence, or our fraud or fraudulent misrepresentation, or any other liability that cannot be excluded or limited by law.\n
+16.2 To the extent permitted by law, we exclude all conditions, warranties, representations or other terms that may apply to the Site or any content on it, or services provided through it, whether express or implied.\n
+16.3 We will not be liable to you or any other user of the Site for any loss or damage, whether in contract, tort (including negligence), breach of statutory duty, or otherwise, even if foreseeable, arising under or in connection with the use of, or inability to use,the Site or
+       any products or services provided through it including without limitation any direct loss of profit, loss or damage to data, loss of reputation or goodwill, loss of opportunity or anticipated savings or any indirect, special, consequential or punitive losses of any kind.\n</string>
+    <string name="tc_general">17.1 The Terms do not create or infer any rights that are enforceable by any person who is not a party to them.\n
+17.2 You may not assign, sub-license or otherwise transfer any of your rights or obligations in the Terms to any other person without our written consent.\n
+17.3 If we decide not to exercise or enforce any right that we have against you at a particular time, then this does not prevent us from later deciding to exercise or enforce that right.\n
+17.4 If any part of the Terms is found to be illegal, invalid or otherwise unenforceable by a court or regulator, then, where required, that part shall be deleted from the Terms and the remaining parts of the Terms will continue to be enforceable.\n
+17.5 These Terms and any non-contractual obligations arising out of them shall be governed by and construed in accordance with English law and if you are a business you agree to submit to the exclusive jurisdiction of the English courts.\n</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
 
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_faltu">faltu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

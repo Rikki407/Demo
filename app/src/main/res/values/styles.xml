@@ -10,6 +10,8 @@
         <item name="overlapAnchor">false</item>
         <item name="android:overlapAnchor" tools:ignore="NewApi">false</item>
         <item name="android:dropDownVerticalOffset">4.0dip</item>
+        <item name="colorControlActivated">@color/kp_blue</item>
+        <item name="colorControlNormal">@color/cardTextColor</item>
     </style>
 
     <style name="Your.Theme" parent="@android:style/Theme.Holo"></style>
@@ -21,12 +23,25 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--<item name="windowContentOverlay">@null</item>-->
     </style>
+
+    <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <style name="myTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="colorAccent">@color/kp_blue</item>
+
+        <!--<item name="android:windowBackground">@null</item>-->
 
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

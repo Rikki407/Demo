@@ -50,4 +50,5 @@ public class ABC_PagerAdapter extends FragmentPagerAdapter
     public static void setPos(int pos) {
         ABC_PagerAdapter.pos = pos;
     }
+
 }

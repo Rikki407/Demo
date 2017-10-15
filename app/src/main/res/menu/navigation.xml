@@ -6,10 +6,6 @@
         android:icon="@drawable/bottom_nav_home"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/bottom_navigation_search"
-        android:icon="@drawable/bottom_nav_search"
-        android:title="@string/title_search" />
-    <item
         android:id="@+id/bottom_navigation_menu"
         android:icon="@drawable/bottom_nav_menu"
         android:title="@string/title_menu" />

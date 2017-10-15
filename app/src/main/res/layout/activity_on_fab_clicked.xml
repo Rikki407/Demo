@@ -11,30 +11,68 @@
         android:layout_weight="0.5"
         android:layout_height="match_parent"
         android:background="@color/secendory"
+        android:orientation="vertical"
         >
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:id="@+id/post_ads"
-            app:srcCompat="@drawable/post_ads_icon"
-            android:background="?attr/selectableItemBackground"
-        />
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:padding="30dp"
+                app:srcCompat="@drawable/post_ads_icon"
+            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="#FFFFFF"
+                android:text="Ads"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </FrameLayout>
     <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="0.5"
         android:layout_height="match_parent"
-        android:background="@color/com_facebook_blue"
+        android:background="@color/kp_blue"
+        android:clickable="true"
         >
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
             android:id="@+id/post_requirements"
-            app:srcCompat="@drawable/post_req_ads_icon2"
-            />
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:padding="20dp"
+                app:srcCompat="@drawable/post_req_ads_icon2"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="#FFFFFF"
+                android:text="Requirements"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </FrameLayout>
 
 </LinearLayout>

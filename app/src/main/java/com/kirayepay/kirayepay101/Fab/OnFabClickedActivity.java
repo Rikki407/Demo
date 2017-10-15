@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.kirayepay.kirayepay101.Fab.ADs.GetImagesActivity;
+import com.kirayepay.kirayepay101.Fab.Requirements.PostRequirementsActivity;
 import com.kirayepay.kirayepay101.R;
 
 /**
@@ -15,14 +17,14 @@ import com.kirayepay.kirayepay101.R;
 
 public class OnFabClickedActivity extends AppCompatActivity implements View.OnClickListener
 {
-    ImageView post_ads,post_requirments;
+    private LinearLayout post_ads,post_requirments;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_fab_clicked);
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        post_ads = (ImageView) findViewById(R.id.post_ads);
-        post_requirments = (ImageView) findViewById(R.id.post_requirements);
+        post_ads = (LinearLayout) findViewById(R.id.post_ads);
+        post_requirments = (LinearLayout) findViewById(R.id.post_requirements);
         post_ads.setOnClickListener(this);
         post_requirments.setOnClickListener(this);
     }
@@ -46,11 +48,14 @@ public class OnFabClickedActivity extends AppCompatActivity implements View.OnCl
       switch (v.getId())
       {
           case R.id.post_ads :
-              Intent intent = new Intent(OnFabClickedActivity.this,PostAdsDetails.class);
-              startActivity(intent);
-              this.overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
+              Intent ad_intent = new Intent(OnFabClickedActivity.this,GetImagesActivity.class);
+              startActivity(ad_intent);
+              this.overridePendingTransition(R.anim.right_in,R.anim.right_out);
               break;
           case R.id.post_requirements :
+              Intent req_intent = new Intent(OnFabClickedActivity.this,PostRequirementsActivity.class);
+              startActivity(req_intent);
+              this.overridePendingTransition(R.anim.left_in,R.anim.left_out);
               break;
       }
     }

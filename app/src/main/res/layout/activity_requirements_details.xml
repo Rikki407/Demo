@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kirayepay.kirayepay101.Details.RequirementsDetailsActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/ads_detail_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shape="ring"
+                app:cardCornerRadius="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardElevation="3dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="7dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/kp_red"
+                        android:id="@+id/reqmnt_title"
+                        android:textSize="30dp"
+                        android:hint="Req title"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/reqmnt_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="description"
+                            android:textColor="@color/cardTextColor"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="category  "
+                            android:textColor="@color/kp_red"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/reqmnt_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="category"
+                            android:textColor="@color/cardTextColor"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="from   "
+                                android:textColor="@color/kp_red"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/reqmnt_from"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:hint="from"
+                                android:textColor="@color/cardTextColor"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="16sp"
+                                android:gravity="center"
+                                android:textColor="@color/kp_red"
+                                android:text=" till   "/>
+
+                            <TextView
+                                android:id="@+id/reqmnt_till"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:hint="till"
+                                android:textColor="@color/cardTextColor"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shape="ring"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="#FFFFFF"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="7dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:textColor="@color/kp_blue"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="Name"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:textColor="@color/cardTextColor"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:id="@+id/reqmnt_name"
+                            android:hint="--"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/kp_blue"
+                            android:textSize="16sp"
+                            android:text="Phone"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
+                            android:textColor="@color/cardTextColor"
+                            android:id="@+id/reqmnt_phone"
+                            android:hint="--"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.2"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:padding="7dp"
+                            android:id="@+id/reqmnt_call_seller"
+                            app:srcCompat="@drawable/seller_call"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/kp_blue"
+                            android:textSize="16sp"
+                            android:text="Email"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/cardTextColor"
+                            android:textSize="16sp"
+                            android:id="@+id/reqmnt_email"
+                            android:hint="--"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.2"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:padding="7dp"
+                            android:id="@+id/reqmnt_mail_seller"
+                            app:srcCompat="@drawable/seller_mail"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:textColor="@color/kp_blue"
+                            android:layout_marginBottom="5dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="Address"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardTextColor"
+                            android:textSize="16sp"
+                            android:id="@+id/reqmnt_address"
+                            android:hint="--"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

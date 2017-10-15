@@ -19,8 +19,7 @@ public class ApiClient
         {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://www.kirayepay.com/api/")
-                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().
-                            serializeNulls().create()))
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().serializeNulls().create()))
                     .build();
             apiInterface =retrofit.create(ApiInterface.class);
         }

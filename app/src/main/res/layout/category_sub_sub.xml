@@ -21,6 +21,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/cardTextColor"
                     android:hint="name"
                     android:id="@+id/sub_sub_cat_text"
                     android:paddingLeft="80dp"

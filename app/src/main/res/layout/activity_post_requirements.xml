@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kirayepay.kirayepay101.Fab.Requirements.PostRequirementsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/post_layout"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/ads_detail_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Post"
+                        android:textAllCaps="false"
+                        android:textColor="@color/kp_red"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=" Requirement"
+                        android:textAllCaps="false"
+                        android:textColor="@color/kp_blue"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.27"
+                                    android:text="Category"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/post_req_category"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="false"
+                                    android:layout_weight="0.73"
+                                    android:paddingLeft="7dp"
+                                    android:paddingRight="7dp"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sub_1_cat_card"
+                        android:visibility="gone"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Sub Category"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/post_req_sub_1_category"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="false"
+                                    android:paddingLeft="7dp"
+                                    android:paddingRight="7dp"
+                                    android:layout_weight="0.6"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/sub_2_cat_card"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Sub Category"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/post_req_sub_2_category"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="false"
+                                    android:layout_weight="0.6"
+                                    android:paddingLeft="7dp"
+                                    android:paddingRight="7dp"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.25"
+                                    android:text="Title"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/post_req_title"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.75"
+                                    android:paddingLeft="7dp"
+                                    android:paddingRight="7dp"
+                                    android:cursorVisible="false"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Details Of Requirement  "
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/post_req_requirement"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="7dp"
+                                    android:paddingRight="7dp"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:shape="ring"
+                        app:cardBackgroundColor="@color/kp_red"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="From "
+                                    android:gravity="center"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/post_req_from"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:clickable="true"
+                                    android:gravity="center"
+                                    android:focusable="false"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:text=" Till"
+                                    android:textColor="@color/cardBackground"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+
+                                <EditText
+                                    android:id="@+id/post_req_till"
+                                    android:layout_width="0dp"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:focusable="false"
+                                    android:background="@drawable/edittext_line"
+                                    android:textColor="@color/cardBackground"
+                                    android:textCursorDrawable="@drawable/edittext_cursor" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/post_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/kp_blue">
+            <Button
+                android:id="@+id/post_req_bttn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:text="     Post     "
+                android:textAllCaps="false"
+                android:textColor="@color/cardBackground"
+                android:textSize="18sp" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

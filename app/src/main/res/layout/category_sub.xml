@@ -30,6 +30,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="name"
+                        android:textColor="@color/cardTextColor"
                         android:paddingLeft="40dp"
                         android:id="@+id/sub_cat_text"
                         android:layout_gravity="center_vertical"

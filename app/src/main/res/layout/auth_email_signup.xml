@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#2196F3"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:text=" Sign Up"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textSize="20sp" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="13dp"
+        android:gravity="center"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/edittext_line"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/signup_name"
+            android:hint="Full Name"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/edittext_line"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/signup_emailaddress"
+            android:inputType="textEmailAddress"
+            android:hint="Email Address"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="@drawable/edittext_line"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/signup_password"
+            android:inputType="textPassword"
+            android:hint="Password"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/edittext_line"
+            android:textSize="20sp"
+            android:id="@+id/signup_confirmpassword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="+91"/>
+
+            <EditText
+                android:id="@+id/signup_mobnum"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/edittext_line"
+                android:fontFamily="monospace"
+                android:hint="Mobile number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="20sp"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+
+                />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:background="#D50000"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sign_in_button"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="#FFFFFF"
+                android:text="Register"
+                android:textSize="18dp"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>

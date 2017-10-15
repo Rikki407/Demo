@@ -2,102 +2,116 @@ package com.kirayepay.kirayepay101.AdsOfCategory;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.kirayepay.kirayepay101.MyClasses.Acquire;
-import com.kirayepay.kirayepay101.MyClasses.CategoryHierarchy;
+import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
+import com.kirayepay.kirayepay101.RikkiClasses.CategoryHierarchy;
 import com.kirayepay.kirayepay101.Network.Responses.CategoriesContainments;
 import com.kirayepay.kirayepay101.R;
 
 import java.util.ArrayList;
+
 /**
  * Created by rikki on 8/9/17.
  */
 
-public class AdsByCategoryFragment extends Fragment implements View.OnClickListener
-{
+public class AdsByCategoryFragment extends Fragment {
 
     private ABC_PagerAdapter abc_pagerAdapter;
     private ViewPager viewPager;
+    private TabLayout tabLayout;
     ArrayList<String> categories_names;
-    ArrayList<AdsListFragment> adsListFragments;
-    int category_id,parent_category_id;
+    static ArrayList<AdsListFragment> adsListFragments;
+    int category_id, parent_category_id;
     int selected_cat_pos = -1;
-    public ImageView list_to_grid;
+
     public static AdsByCategoryFragment newInstance() {
-        AdsByCategoryFragment hf= new AdsByCategoryFragment();
+        AdsByCategoryFragment hf = new AdsByCategoryFragment();
         return hf;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frag_adsbycategory,container,false);
-        list_to_grid = (ImageView) v.findViewById(R.id.list_to_grid_image);
-        list_to_grid.setImageResource(R.drawable.grid_view);
-        list_to_grid.setOnClickListener(this);
+        View v = inflater.inflate(R.layout.frag_adsbycategory, container, false);
         category_id = getArguments().getInt("CategoryId");
         parent_category_id = getArguments().getInt("ParentId");
+
         categories_names = new ArrayList<>();
-        adsListFragments = new ArrayList<>() ;
+        adsListFragments = new ArrayList<>();
 
-        fetchCategoriesNames();
+        fetchCategoriesNames();             // fetching categpries title for view pager
 
-        adsListFragments = buildFragments();
-        abc_pagerAdapter = new ABC_PagerAdapter(getActivity(),getFragmentManager(), adsListFragments,categories_names);
+        adsListFragments = buildFragments();   // fetching the fragments for the viewpager
+
+        abc_pagerAdapter = new ABC_PagerAdapter(getActivity(), getFragmentManager(), adsListFragments, categories_names);
+        tabLayout = (TabLayout) v.findViewById(R.id.adsbycat_tablayout);
         viewPager = (ViewPager) v.findViewById(R.id.adsbycat_viewpager);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(abc_pagerAdapter);
-        viewPager.setCurrentItem(selected_cat_pos);
+        viewPager.setCurrentItem(selected_cat_pos);   //displaying the category ads selected by the user......changing the viewpager selected fragment
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                /*
+                    For filter updating
+                 */
+                Acquire.PRICE_SEEKBAR_CURR = Integer.MAX_VALUE;
+                Acquire.SECURITY_SEEKBAR_CURR = Integer.MAX_VALUE;
+                selected_cat_pos = position;
+                if (adsListFragments != null) {
+                    adsListFragments.get(position).updateInitFilterValues();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         return v;
     }
+
 
     private ArrayList<AdsListFragment> buildFragments() {
         ArrayList<AdsListFragment> fragments = new ArrayList<>();
         ArrayList<CategoriesContainments> SiblingCategories = CategoryHierarchy.getSubcategories().get(parent_category_id);
-        for(int i = 0; i<categories_names.size(); i++) {
+        for (int i = 0; i < categories_names.size(); i++) {
             Bundle b = new Bundle();
             b.putInt("CategoryId", SiblingCategories.get(i).getCategory_id());
+            b.putInt("view_pager_position", i);
             AdsListFragment adsListFragment = new AdsListFragment();
             adsListFragment.setArguments(b);
             fragments.add(adsListFragment);
         }
+
         return fragments;
     }
 
-    private void fetchCategoriesNames()
-    {
-        int parent_size = CategoryHierarchy.getSubcategories().get(parent_category_id).size();
-        ArrayList<CategoriesContainments> SiblingCategories = CategoryHierarchy.getSubcategories().get(parent_category_id);
-        for(int i = 0 ;i<parent_size;i++) {
-            categories_names.add(SiblingCategories.get(i).getCategory_name());
-            if(SiblingCategories.get(i).getCategory_id()==category_id)selected_cat_pos=i;
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.list_to_grid_image :
-                Acquire.IS_LISTVIEW = !Acquire.IS_LISTVIEW;
-                for(int i = 0; i< adsListFragments.size(); i++) {
-                    if (adsListFragments.get(i).gridLayoutManager != null) {
-                        if (adsListFragments.get(i).gridLayoutManager.getSpanCount() == 1) {
-                            list_to_grid.setImageResource(R.drawable.list_view);
-                            adsListFragments.get(i).gridLayoutManager.setSpanCount(3);
-                        } else {
-                            list_to_grid.setImageResource(R.drawable.grid_view);
-                            adsListFragments.get(i).gridLayoutManager.setSpanCount(1);
-                        }
-                        adsListFragments.get(i).adsByCategoryAdapter.notifyItemRangeChanged(0, adsListFragments.get(i).adsByCategoryAdapter.getItemCount());
-                    }
+    private void fetchCategoriesNames() {
+        if (CategoryHierarchy.getSubcategories().get(parent_category_id) != null) {
+            int parent_size = CategoryHierarchy.getSubcategories().get(parent_category_id).size();
+            ArrayList<CategoriesContainments> SiblingCategories = CategoryHierarchy.getSubcategories().get(parent_category_id);
+            for (int i = 0; i < parent_size; i++) {
+                categories_names.add(SiblingCategories.get(i).getCategory_name());
+                if (SiblingCategories.get(i).getCategory_id() == category_id) {
+                    selected_cat_pos = i;
+                    Acquire.INIT_ABC_PAGER_POS = selected_cat_pos;
                 }
+
+            }
         }
     }
 

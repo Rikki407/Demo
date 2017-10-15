@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/kp_blue"
+        android:paddingLeft="20dp"
+        android:text=" Sign In"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/edittext_line"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textColorHint="#FFFFFF"
+                android:id="@+id/user_email"
+                android:inputType="textEmailAddress"
+                android:hint="Email/ Phone no."/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:textColorHint="#FFFFFF"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/edittext_line"
+                android:id="@+id/user_password"
+                android:inputType="textPassword"
+                android:hint="Password"
+                />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D50000"
+                >
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sign_in_button"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="#FFFFFF"
+                    android:text="Log In"
+                />
+
+            </FrameLayout>
+        </LinearLayout>
+</LinearLayout>
