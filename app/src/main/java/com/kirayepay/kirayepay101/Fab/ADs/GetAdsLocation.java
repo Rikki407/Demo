@@ -36,7 +36,6 @@ public class GetAdsLocation extends AppCompatActivity
     private TextView post_this_ad;
     MultipartBody.Part fileToUpload;
     RequestBody filename;
-    Uri main_uri;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,11 +48,10 @@ public class GetAdsLocation extends AppCompatActivity
         other_img_uri_2 = bundle.getString("other_uri_2");
         other_img_uri_3 = bundle.getString("other_uri_3");
         other_img_uri_4 = bundle.getString("other_uri_4");
-        main_uri= Uri.parse(Acquire.MAIN_URI);
 
-        Log.e("show_uri_loc"," - "+main_uri);
+        Log.e("show_uri_loc"," "+main_img_uri);
 
-        createFile(main_uri);
+        createFile(Uri.parse(main_img_uri));
 
         post_this_ad = (TextView) findViewById(R.id.post_this_ad);
         post_this_ad.setOnClickListener(new View.OnClickListener() {

@@ -46,6 +46,7 @@ public class GetAdsDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_details);
         Intent intent = getIntent();
+        mContext = this;
         main_img_uri = intent.getStringExtra("main_img_uri");
         other_img_uri_1 = intent.getStringExtra("other_img_uri_1");
         other_img_uri_2 = intent.getStringExtra("other_img_uri_2");
@@ -57,14 +58,14 @@ public class GetAdsDetails extends AppCompatActivity {
         goto_ads_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(mContext,GetAdsLocation.class);
+                Intent intent2 = new Intent(GetAdsDetails.this,GetAdsLocation.class);
                 Acquire.MAIN_URI = main_img_uri;
                 Log.e("show_uri",""+main_img_uri);
-                intent2.putExtra("HELLO","main_uri");
-                intent2.putExtra(other_img_uri_1,"other_uri_1");
-                intent2.putExtra(other_img_uri_2,"other_uri_2");
-                intent2.putExtra(other_img_uri_3,"other_uri_3");
-                intent2.putExtra(other_img_uri_4,"other_uri_4");
+                intent2.putExtra("main_uri",main_img_uri);
+                intent2.putExtra("other_uri_1",other_img_uri_1);
+                intent2.putExtra("other_uri_2",other_img_uri_2);
+                intent2.putExtra("other_uri_3",other_img_uri_3);
+                intent2.putExtra("other_uri_4",other_img_uri_4);
                 startActivity(intent2);
             }
         });
@@ -73,7 +74,6 @@ public class GetAdsDetails extends AppCompatActivity {
         category_text = (AutoCompleteTextView) findViewById(R.id.post_ads_category);
         subcat1_text = (AutoCompleteTextView) findViewById(R.id.post_ads_subcategory_1);
         subcat2_text = (AutoCompleteTextView) findViewById(R.id.post_ads_subcategory_2);
-        mContext = this;
         main_categories = new ArrayList<>();
         sub_1_categories = new ArrayList<>();
         sub_2_categories = new ArrayList<>();
