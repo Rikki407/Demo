@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ExpandableListView
-        android:id="@+id/mainList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:groupIndicator="@null"
-        >
-    </ExpandableListView>
+
+        <ExpandableListView
+            android:id="@+id/mainList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@null">
+        </ExpandableListView>
+
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,6 +50,8 @@ public class AdsListFragment extends Fragment {
     String condition;
     public GridLayoutManager gridLayoutManager;
     int category_id;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     ArrayList<AdsContainments> body;
 
 
@@ -56,6 +59,17 @@ public class AdsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recyclerview_adslist, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(adsListOfCategory!=null) changeAccToFilter();
+
+                else swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
+        swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
         rental_options.put(R.id.ro_daily, true);
         rental_options.put(R.id.ro_weekly, true);
         rental_options.put(R.id.ro_monthly, true);
@@ -70,12 +84,9 @@ public class AdsListFragment extends Fragment {
         adsListOfCategory = new ArrayList<>();
         adsAdapter = new AdsAdapter(getActivity(), adsListOfCategory, gridLayoutManager, Acquire.NORMAL_CALL);
         recyclerView.setAdapter(adsAdapter);
-        if (view_pager_position == Acquire.INIT_ABC_PAGER_POS && !already_called) {
-            updateInitFilterValues();
-            Log.e("vhgv", "gfgjh");
-            already_called = true;
-        }
         fetchAdsForCategory();
+
+
         return v;
     }
 
@@ -95,9 +106,16 @@ public class AdsListFragment extends Fragment {
                         if (max_deposit_price <= curr_deposit) max_deposit_price = curr_deposit;
                         adsListOfCategory.add(body.get(i));
                     }
+
                     curr_deposit_price = max_deposit_price;
                     curr_rent_price = max_rent_price;
+                    if (view_pager_position == Acquire.INIT_ABC_PAGER_POS && !already_called) {
+                        updateInitFilterValues();
+                        Log.e("vhgv", "gfgjh");
+                        already_called = true;
+                    }
                     adsAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -138,6 +156,8 @@ public class AdsListFragment extends Fragment {
         curr_rent_price = Acquire.PRICE_SEEKBAR_CURR;
         curr_deposit_price = Acquire.SECURITY_SEEKBAR_CURR;
         adsAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
+
     }
 
 
@@ -183,6 +203,10 @@ public class AdsListFragment extends Fragment {
         Acquire.SECURITY_SEEKBAR_MAX = max_deposit_price;
         Acquire.SECURITY_SEEKBAR_CURR = curr_deposit_price;
         Acquire.PRICE_SEEKBAR_CURR = curr_rent_price;
+        Log.e("vhgv", ""+max_rent_price+" , "+ max_rent_price);
+
+
+
     }
 
     @Override

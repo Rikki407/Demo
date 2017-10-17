@@ -32,7 +32,7 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
     int category_id,parent_category_id;
     int rent_seek_progress,deposit_seek_progress;
     View bottomSheet;
-    SeekBar price_seekbar,security_seekbar;
+    public static SeekBar price_seekbar,security_seekbar;
     TextView price_textview,security_textview;
     TextView ro_daily,ro_weekly,ro_monthly,ro_occasional;
     RadioGroup conditions;
