@@ -1,8 +1,10 @@
 package com.kirayepay.kirayepay101.Navigation.Home.HomePagerFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,11 +39,21 @@ public class TrendingFragment extends Fragment
     ArrayList<TrendingAds> trendingAds;
     public TrendingAdapter trendingAdapter;
     public GridLayoutManager gridLayoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recyclerview_adslist,container,false);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTrendingAds();
+            }
+        });
+        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
+        swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
         recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -51,6 +63,7 @@ public class TrendingFragment extends Fragment
         fetchTrendingAds();
         return v;
     }
+
 
     private void fetchTrendingAds()
     {
@@ -71,9 +84,12 @@ public class TrendingFragment extends Fragment
 
     private void addItemsToListItem(ArrayList<TrendingAds> ads) {
 
+        trendingAds.clear();
         trendingAds.addAll(ads);
         Log.e("show_size",""+ads.size());
         trendingAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
+
     }
 
 }

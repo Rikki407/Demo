@@ -30,28 +30,44 @@ import retrofit2.Response;
  * Created by rikki on 10/4/17.
  */
 
-public class GetAdsLocation extends AppCompatActivity
-{
-    private String main_img_uri, other_img_uri_1, other_img_uri_2, other_img_uri_3, other_img_uri_4;
+public class GetAdsLocation extends AppCompatActivity {
+    private String m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4;
     private TextView post_this_ad;
-    MultipartBody.Part fileToUpload;
+    MultipartBody.Part main_image=null;
     RequestBody filename;
+    MultipartBody.Part other_image_1 = null, other_image_2 = null, other_image_3 = null, other_image_4 = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_location);
+        Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
 
         Bundle bundle = getIntent().getExtras();
-        main_img_uri = bundle.getString("main_uri");
-        other_img_uri_1 = bundle.getString("other_uri_1");
-        other_img_uri_2 = bundle.getString("other_uri_2");
-        other_img_uri_3 = bundle.getString("other_uri_3");
-        other_img_uri_4 = bundle.getString("other_uri_4");
+        if (bundle != null) {
+            m_img_uri_str = bundle.getString("main_uri");
+            o_img_uri_str_1 = bundle.getString("other_uri_1");
+            o_img_uri_str_2 = bundle.getString("other_uri_2");
+            o_img_uri_str_3 = bundle.getString("other_uri_3");
+            o_img_uri_str_4 = bundle.getString("other_uri_4");
+        }
 
-        Log.e("show_uri_loc"," "+main_img_uri);
+        if (m_img_uri_str != null&&!m_img_uri_str.isEmpty()) {
+            createFile(m_img_uri_str);
+        }
+        if (o_img_uri_str_1 != null&&!o_img_uri_str_1.isEmpty()) {
+            createFile(o_img_uri_str_1);
+        }
+        if (o_img_uri_str_2 != null&&!o_img_uri_str_2.isEmpty()) {
+            createFile(o_img_uri_str_2);
+        }
+        if (o_img_uri_str_3 != null&&!o_img_uri_str_3.isEmpty()) {
+            createFile(o_img_uri_str_3);
+        }
+        if (o_img_uri_str_4 != null&&!o_img_uri_str_4.isEmpty()) {
+            createFile(o_img_uri_str_4);
+        }
 
-        createFile(Uri.parse(main_img_uri));
 
         post_this_ad = (TextView) findViewById(R.id.post_this_ad);
         post_this_ad.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +80,7 @@ public class GetAdsLocation extends AppCompatActivity
 
     private void postTheAd() {
 
-        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), "Tabla111");
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), "HAHA6");
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "A tabla for rent");
         RequestBody category = RequestBody.create(MediaType.parse("text/plain"), "15");
         RequestBody availability = RequestBody.create(MediaType.parse("text/plain"), "yes");
@@ -80,9 +96,24 @@ public class GetAdsLocation extends AppCompatActivity
 
         ApiInterface apiInterface = ApiClient.getApiInterface();
 
-        Log.e("itenom", "here" );
+        Log.e("itenom", "here "+""+main_image+" : "+m_img_uri_str);
 
-        Call<PostContainments> postAdCall = apiInterface.postAds(title, description, category, availability, condition, quantity, rental_option, locality, city, pincode, state, district, phone, fileToUpload, filename);
+        Call<PostContainments> postAdCall ;
+
+        if(!Acquire.CALL_WITH_IMAGES)
+        {
+            Log.e("itenom", "heretoo"+Acquire.CALL_WITH_IMAGES);
+
+            postAdCall = apiInterface.postAds(title, description, category, availability, condition, quantity,
+                    rental_option, locality, city, pincode, state, district, phone);
+        }
+        else {
+            Log.e("itenom", "heretx"+Acquire.CALL_WITH_IMAGES);
+
+            postAdCall =apiInterface.postAdsWithImage(title, description, category, availability, condition, quantity,
+                    rental_option, locality, city, pincode, state, district, phone, main_image, filename, other_image_1, other_image_2,
+                    other_image_3, other_image_4);
+        }
         postAdCall.enqueue(new Callback<PostContainments>() {
 
             @Override
@@ -108,21 +139,39 @@ public class GetAdsLocation extends AppCompatActivity
         final int screen_width = getResources().getDisplayMetrics().widthPixels;
         final int screen_height = getResources().getDisplayMetrics().heightPixels;
         final int new_window_width = screen_width * 100 / 100;
-        final int new_window_height = screen_height * 72/100;
+        final int new_window_height = screen_height * 72 / 100;
         WindowManager.LayoutParams layout = getWindow().getAttributes();
         layout.width = Math.max(layout.width, new_window_width);
         layout.height = Math.max(layout.height, new_window_height);
         getWindow().setAttributes(layout);
     }
 
-    private void createFile(Uri uri) {
-        Log.e("kbkbnk",""+uri);
-        String filePath = getRealPathFromURIPath(uri,GetAdsLocation.this);
-        File file =new File(filePath);
+    private void createFile(String uri_string) {
+        Uri uri = Uri.parse(uri_string);
+        Log.e("kbkbnk", "" + uri);
+        String filePath = getRealPathFromURIPath(uri, GetAdsLocation.this);
+        File file = new File(filePath);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-        fileToUpload = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
         filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
+
+        if (uri_string.equals(m_img_uri_str))
+            main_image = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+
+        else if (uri_string.equals(o_img_uri_str_1))
+            other_image_1 = MultipartBody.Part.createFormData("other_image[]", file.getName(), requestBody);
+
+        else if (uri_string.equals(o_img_uri_str_2))
+            other_image_2 = MultipartBody.Part.createFormData("other_image[]", file.getName(), requestBody);
+
+        else if (uri_string.equals(o_img_uri_str_3))
+            other_image_3 = MultipartBody.Part.createFormData("other_image[]", file.getName(), requestBody);
+
+        else if (uri_string.equals(o_img_uri_str_4))
+            other_image_4 = MultipartBody.Part.createFormData("other_image[]", file.getName(), requestBody);
+
     }
 
     private String getRealPathFromURIPath(Uri contentURI, AppCompatActivity activity) {

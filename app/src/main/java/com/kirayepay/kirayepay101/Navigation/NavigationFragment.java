@@ -45,8 +45,7 @@ public class NavigationFragment extends Fragment
                     fragment = AllCategoriesFragment.newInstance();
                     break;
             }
-            if(fragment!=null)
-            {
+            if(fragment!=null) {
                 FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_contents,fragment);
                 fragmentTransaction.commit();

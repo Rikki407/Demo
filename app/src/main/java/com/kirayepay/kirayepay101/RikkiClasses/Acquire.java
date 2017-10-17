@@ -39,7 +39,9 @@ public class Acquire {
      */
     public static String CONTDITITON = "Both";
 
-    public static String MAIN_URI = "_";
+    public static boolean CALL_WITH_IMAGES = false;
+
+
 
 
 

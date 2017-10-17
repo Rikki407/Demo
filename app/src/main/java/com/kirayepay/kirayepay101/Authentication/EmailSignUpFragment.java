@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.kirayepay.kirayepay101.MainActivity;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
@@ -18,6 +21,7 @@ import com.kirayepay.kirayepay101.Network.Responses.EmailRegisterResponse;
 import com.kirayepay.kirayepay101.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +36,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class EmailSignUpFragment extends Fragment
 {
     EditText name,email_address,password,confirm_password,mobnum;
+    Button register_user_bttn;
 
     @Nullable
     @Override
@@ -42,24 +47,62 @@ public class EmailSignUpFragment extends Fragment
         password = (EditText) v.findViewById(R.id.signup_password);
         confirm_password = (EditText) v.findViewById(R.id.signup_confirmpassword);
         mobnum = (EditText) v.findViewById(R.id.signup_mobnum);
+        register_user_bttn = (Button) v.findViewById(R.id.register_user_button);
+        register_user_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(name==null||name.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Please provide a name",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(email_address==null||email_address.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Please provide a email",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(mobnum==null||mobnum.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Please provide your contact number",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(password==null||password.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Please provide a password",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(confirm_password==null||confirm_password.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Please confirm your password",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!confirm_password.getText().toString().equals(password.getText().toString()))
+                {
+                    Toast.makeText(getActivity(),"Confirm Password do not match !!!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                emailLogin(name.getText().toString(),password.getText().toString(),mobnum.getText().toString(),email_address.getText().toString(),confirm_password.getText().toString());
+            }
+        });
         return v;
     }
-    private void emailLogin(final String name,String password,String phone,String email,String password_confirmation)
+    private void emailLogin(final String name, String password, String phone, final String email, String password_confirmation)
     {
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Call<ArrayList<EmailRegisterResponse>> emailRegisterCall = apiInterface.userEmailRegister(name,password,phone,email,password_confirmation);
-        emailRegisterCall.enqueue(new Callback<ArrayList<EmailRegisterResponse>>() {
+        Call<EmailRegisterResponse> emailRegisterCall = apiInterface.userEmailRegister(name,password,phone,email,password_confirmation);
+        emailRegisterCall.enqueue(new Callback<EmailRegisterResponse>() {
             @Override
-            public void onResponse(Call<ArrayList<EmailRegisterResponse>> call, Response<ArrayList<EmailRegisterResponse>> response) {
-//                Log.e("EmailResponse","Logged In");
+            public void onResponse(Call<EmailRegisterResponse> call, Response<EmailRegisterResponse> response) {
+                Log.e("EmailResponse","Logged In"+response.body().getError());
+
 //                Intent intent = new Intent(getActivity(), MainActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                storeInfoInSharedPreference(loginResponse.getEmail(),loginResponse.getUserid(),loginResponse.getName(),Acquire.EMAIL_AUTH);
+//                storeInfoInSharedPreference(email,""+response.body().get(0).getId(),name,Acquire.EMAIL_AUTH);
 //                startActivity(intent);
             }
             @Override
-            public void onFailure(Call<ArrayList<EmailRegisterResponse>> call, Throwable t) {
-                Log.e("EmailResponse","Error "+t.getCause());
+            public void onFailure(Call<EmailRegisterResponse> call, Throwable t) {
+                Log.e("EmailResponse","Error "+t.getMessage()+ Arrays.toString(t.getStackTrace()));
             }
         });
     }

@@ -21,8 +21,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.R;
+import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,10 +44,6 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
             other_image_3_plus, other_image_3_cross, other_image_4_plus, other_image_4_cross;
     TextView next_activity;
 
-    MultipartBody.Builder builder = new MultipartBody.Builder();
-    MultipartBody.Part fileToUpload, fileToUpload_1, fileToUpload_2;
-    RequestBody filename, filename_1, filename_2;
-
     private static final int REQUEST_CAMERA_CODE_0 = 8370;
     private static final int REQUEST_CAMERA_CODE_1 = 8371;
     private static final int REQUEST_CAMERA_CODE_2 = 8372;
@@ -56,12 +54,7 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
     private static final int REQUEST_GALLERY_CODE_2 = 202;
     private static final int REQUEST_GALLERY_CODE_3 = 203;
     private static final int REQUEST_GALLERY_CODE_4 = 204;
-    private static final int READ_REQUEST_CODE = 300;
-    private static final String SERVER_PATH = "Path_to_your_server";
-    HashMap<String, RequestBody> map = new HashMap<>(2);
-    List<MultipartBody.Part> parts = new ArrayList<>();
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 456;
     private Uri imageUri, main_img_uri, other_img_uri_1, other_img_uri_2, other_img_uri_3, other_img_uri_4;
     private ContentValues values;
 
@@ -106,12 +99,22 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next_activity:
+                if(main_img_uri==null&&(other_img_uri_1!=null||other_img_uri_2!=null||other_img_uri_3!=null||other_img_uri_4!=null)){
+                    Toast.makeText(mContext,"Main image is required with other images ",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Acquire.CALL_WITH_IMAGES = main_img_uri != null;
                 Intent intent = new Intent(mContext, GetAdsDetails.class);
-                intent.putExtra("main_img_uri", "" + main_img_uri);
-                intent.putExtra("other_img_uri_1", "" + other_img_uri_1);
-                intent.putExtra("other_img_uri_2", "" + other_img_uri_2);
-                intent.putExtra("other_img_uri_3", "" + other_img_uri_3);
-                intent.putExtra("other_img_uri_4", "" + other_img_uri_4);
+                if(main_img_uri!=null)
+                intent.putExtra("main_img_uri", main_img_uri.toString());
+                if(other_img_uri_1!=null)
+                intent.putExtra("other_img_uri_1",other_img_uri_1.toString());
+                if(other_img_uri_2!=null)
+                intent.putExtra("other_img_uri_2",other_img_uri_2.toString());
+                if(other_img_uri_3!=null)
+                intent.putExtra("other_img_uri_3",other_img_uri_3.toString());
+                if(other_img_uri_4!=null)
+                intent.putExtra("other_img_uri_4",other_img_uri_4.toString());
                 startActivity(intent);
                 break;
             case R.id.main_image_plus:

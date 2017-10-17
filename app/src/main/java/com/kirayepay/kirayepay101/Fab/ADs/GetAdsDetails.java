@@ -59,7 +59,6 @@ public class GetAdsDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(GetAdsDetails.this,GetAdsLocation.class);
-                Acquire.MAIN_URI = main_img_uri;
                 Log.e("show_uri",""+main_img_uri);
                 intent2.putExtra("main_uri",main_img_uri);
                 intent2.putExtra("other_uri_1",other_img_uri_1);
@@ -79,6 +78,7 @@ public class GetAdsDetails extends AppCompatActivity {
         sub_2_categories = new ArrayList<>();
 
 
+        if(CategoryHierarchy.getSubcategories().get(0)!=null)
         for (int i = 0; i < CategoryHierarchy.getSubcategories().get(0).size(); i++) {
             main_categories.add(CategoryHierarchy.getSubcategories().get(0).get(i).getCategory_name());
             Log.e("main_categoriesxxx", main_categories.get(i));

@@ -12,8 +12,14 @@ public class EmailRegisterResponse
     private String message;
     @SerializedName("status")
     private String status;
+    @SerializedName("user_id")
+    private int id;
     @SerializedName("error")
     private ErrorResponse error;
+
+    public int getId() {
+        return id;
+    }
 
     public String getMessage() {
         return message;

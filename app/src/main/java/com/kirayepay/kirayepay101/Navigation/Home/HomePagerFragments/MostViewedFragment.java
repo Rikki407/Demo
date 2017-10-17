@@ -1,8 +1,10 @@
 package com.kirayepay.kirayepay101.Navigation.Home.HomePagerFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +40,8 @@ public class MostViewedFragment extends Fragment
     ArrayList<AdsContainments> mostViewedAds;
     public AdsAdapter adsAdapter;
     public GridLayoutManager gridLayoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Nullable
     @Override
@@ -45,6 +49,15 @@ public class MostViewedFragment extends Fragment
         View v  = inflater.inflate(R.layout.recyclerview_adslist,container,false);
         recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);
         recyclerView.getItemAnimator().setChangeDuration(600);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchMostViewedAds();
+            }
+        });
+        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
+        swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
         mostViewedAds  = new ArrayList<>();
@@ -63,8 +76,10 @@ public class MostViewedFragment extends Fragment
             @Override
             public void onResponse(Call<ArrayList<AdsContainments>> call, Response<ArrayList<AdsContainments>> response) {
                 if(response.isSuccessful()) {
+                    mostViewedAds.clear();
                     mostViewedAds.addAll(response.body());
                     adsAdapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
             @Override

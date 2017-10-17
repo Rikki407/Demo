@@ -92,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/edittext_line"
+                android:fontFamily="monospace"
                 android:hint="Mobile number"
                 android:inputType="number"
                 android:maxLength="10"

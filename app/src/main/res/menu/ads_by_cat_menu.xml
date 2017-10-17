@@ -9,7 +9,7 @@
         />
     <item
         android:id="@+id/ads_filter"
-        android:icon="@drawable/ads_filter"
+        android:icon="@drawable/filter"
         android:title="filter"
         app:showAsAction="always"/>
 </menu>

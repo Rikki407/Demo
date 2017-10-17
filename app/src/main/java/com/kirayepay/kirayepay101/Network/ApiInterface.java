@@ -65,14 +65,23 @@ public interface ApiInterface
     Call<PostContainments> postRequirements(@Field("userid") String user_id, @Field("title") String title, @Field("parent_category") String parent_category,
                                         @Field("requirement") String description, @Field("when") String when, @Field("till") String till);
 
+
     @Multipart
     @POST("ads?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
     Call<PostContainments> postAds(@Part("title") RequestBody title, @Part("description") RequestBody description,
-                                   @Part("parent_category") RequestBody parent_category, @Part("availability") RequestBody availability,
-                                   @Part("condition") RequestBody condition, @Part("quantity") RequestBody quantity, @Part("rental_option") RequestBody rental_option,
-                                   @Part("locality") RequestBody locality, @Part("city") RequestBody city, @Part("pincode") RequestBody pincode, @Part("state") RequestBody state,
-                                   @Part("district") RequestBody district, @Part("phone") RequestBody phone, @Part MultipartBody.Part image, @Part("image") RequestBody name);
-//    @PartMap() Map<String,RequestBody> mapFileAndName
+                                            @Part("parent_category") RequestBody parent_category, @Part("availability") RequestBody availability,
+                                            @Part("condition") RequestBody condition, @Part("quantity") RequestBody quantity, @Part("rental_option") RequestBody rental_option,
+                                            @Part("locality") RequestBody locality, @Part("city") RequestBody city, @Part("pincode") RequestBody pincode, @Part("state") RequestBody state,
+                                            @Part("district") RequestBody district, @Part("phone") RequestBody phone);
+    @Multipart
+    @POST("ads?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
+    Call<PostContainments> postAdsWithImage(@Part("title") RequestBody title, @Part("description") RequestBody description,
+                                            @Part("parent_category") RequestBody parent_category, @Part("availability") RequestBody availability,
+                                            @Part("condition") RequestBody condition, @Part("quantity") RequestBody quantity, @Part("rental_option") RequestBody rental_option,
+                                            @Part("locality") RequestBody locality, @Part("city") RequestBody city, @Part("pincode") RequestBody pincode, @Part("state") RequestBody state,
+                                            @Part("district") RequestBody district, @Part("phone") RequestBody phone, @Part MultipartBody.Part image, @Part("image") RequestBody name,
+                                            @Part MultipartBody.Part other_img_1, @Part MultipartBody.Part other_img_2, @Part MultipartBody.Part other_img_3, @Part MultipartBody.Part other_img_4);
+
 
     @FormUrlEncoded
     @POST("visitors/save_viewer?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
@@ -92,7 +101,7 @@ public interface ApiInterface
 
     @FormUrlEncoded
     @POST("seller_register?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
-    Call<ArrayList<EmailRegisterResponse>> userEmailRegister(@Field("name") String name, @Field("password") String password,
+    Call<EmailRegisterResponse> userEmailRegister(@Field("name") String name, @Field("password") String password,
                                                              @Field("phone") String phone, @Field("email") String email,
                                                              @Field("password_confirmation") String password_confirmation);
 }
