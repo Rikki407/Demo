@@ -19,15 +19,15 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/toolbarBackground"
+            app:contentScrim="#FFFFFF"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:background="@drawable/water_mark_3"
             app:statusBarScrim="@android:color/transparent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
-
                 <android.support.v4.view.ViewPager
                     android:id="@+id/photos_viewpager"
                     android:layout_width="match_parent"
@@ -117,7 +117,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:hint="ad's title"
                         android:textColor="@color/kp_red"
                         android:textSize="30sp" />
 
@@ -131,7 +130,6 @@
                             android:id="@+id/ads_detail_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="description"
                             android:textColor="@color/cardTextColor"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -192,7 +190,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.7"
-                            android:hint="security deposit"
                             android:textColor="@color/cardTextColor"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -216,7 +213,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.7"
-                            android:hint="condition"
                             android:textColor="@color/cardTextColor"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -240,7 +236,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.7"
-                            android:hint="quantity"
                             android:textColor="@color/cardTextColor"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -264,7 +259,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.7"
-                            android:hint="availability"
                             android:textColor="@color/cardTextColor"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -483,7 +477,8 @@
                 android:id="@+id/related_ads_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"></FrameLayout>
+                android:layout_marginTop="15dp">
+            </FrameLayout>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,8 @@ import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity;
 import com.kirayepay.kirayepay101.MainActivity;
+import com.kirayepay.kirayepay101.Navigation.Home.HomePagerFragments.MostViewedFragment;
+import com.kirayepay.kirayepay101.Navigation.NavigationFragment;
 import com.kirayepay.kirayepay101.Network.Responses.AdsResponse;
 import com.kirayepay.kirayepay101.Network.Responses.PostContainments;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -38,6 +41,7 @@ import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
 import com.kirayepay.kirayepay101.Network.Responses.AdsContainments;
 import com.kirayepay.kirayepay101.R;
+import com.kirayepay.kirayepay101.Search.SearchPagerFragments.SearchAdsFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -156,11 +160,11 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         Bundle bundle = new Bundle();
         bundle.putInt("Ad_Id", ad_id);
         bundle.putInt("CategoryId", cat_id);
+
         RelatedAdsFragment fragment = new RelatedAdsFragment();
         fragment.setArguments(bundle);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.related_ads_holder, fragment).commit();
-
     }
 
     void collapseExpandTextView() {
@@ -231,6 +235,7 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         }
         photosPagerAdapter.notifyDataSetChanged();
         collapsing_toolbar.setTitle("" + body.getAds().get(0).getAds_title());
+        collapsing_toolbar.setCollapsedTitleTextColor(Color.parseColor("#3d3c3c"));
         adsTitle.setText("" + body.getAds().get(0).getAds_title());
 
         Log.e("ad_id", "" + ad_id);

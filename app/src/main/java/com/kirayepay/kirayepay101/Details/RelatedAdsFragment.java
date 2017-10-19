@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,10 @@ public class RelatedAdsFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v  = inflater.inflate(R.layout.recyclerview_adslist,container,false);
+        View v  = inflater.inflate(R.layout.related_ads_list,container,false);
         category_id = getArguments().getInt("CategoryId");
         ad_id = getArguments().getInt("Ad_Id");
-        recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);;
+        recyclerView = (RecyclerView) v.findViewById(R.id.related_recycler_view);;
         recyclerView.addItemDecoration(new RecyclerViewItemDecorator(0));
         linearLayoutManager = new LinearLayoutManager(getActivity() ,LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);

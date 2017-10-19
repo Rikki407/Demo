@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.Adapters.TrendingAdapter;
 import com.kirayepay.kirayepay101.Network.ApiClient;
@@ -46,6 +47,7 @@ public class TrendingFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recyclerview_adslist,container,false);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -77,6 +79,8 @@ public class TrendingFragment extends Fragment
             @Override
             public void onFailure(Call<TrendingContainments> call, Throwable t) {
                 Log.e("trendingfragment", t.getMessage());
+                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 

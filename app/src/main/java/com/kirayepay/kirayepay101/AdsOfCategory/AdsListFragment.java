@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.Adapters.AdsAdapter;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -51,6 +52,7 @@ public class AdsListFragment extends Fragment {
     public GridLayoutManager gridLayoutManager;
     int category_id;
     private SwipeRefreshLayout swipeRefreshLayout;
+    TextView no_results_found;
 
     ArrayList<AdsContainments> body;
 
@@ -59,15 +61,10 @@ public class AdsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recyclerview_adslist, container, false);
+        no_results_found = (TextView) v.findViewById(R.id.no_result_text);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(adsListOfCategory!=null) changeAccToFilter();
+        swipeRefreshLayout.setRefreshing(true);
 
-                else swipeRefreshLayout.setRefreshing(false);
-            }
-        });
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
         swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
         rental_options.put(R.id.ro_daily, true);
@@ -84,7 +81,14 @@ public class AdsListFragment extends Fragment {
         adsListOfCategory = new ArrayList<>();
         adsAdapter = new AdsAdapter(getActivity(), adsListOfCategory, gridLayoutManager, Acquire.NORMAL_CALL);
         recyclerView.setAdapter(adsAdapter);
-        fetchAdsForCategory();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(adsListOfCategory!=null) changeAccToFilter();
+            }
+        });
+        changeAccToFilter();
+
 
 
         return v;
@@ -93,7 +97,6 @@ public class AdsListFragment extends Fragment {
     private void fetchAdsForCategory() {
         ApiInterface apiInterface = ApiClient.getApiInterface();
         Call<ArrayList<AdsContainments>> arrayListCall = apiInterface.getAllAdsInCategories("" + category_id, Acquire.API_KEY);
-
         arrayListCall.enqueue(new Callback<ArrayList<AdsContainments>>() {
             @Override
             public void onResponse(Call<ArrayList<AdsContainments>> call, Response<ArrayList<AdsContainments>> response) {
@@ -115,48 +118,62 @@ public class AdsListFragment extends Fragment {
                         already_called = true;
                     }
                     adsAdapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
 
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<AdsContainments>> call, Throwable t) {
-
+                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     public void changeAccToFilter() {
-        adsListOfCategory.clear();
         Log.e("rikki  ", " rent curr" + Acquire.PRICE_SEEKBAR_CURR + " deposit curr " + Acquire.SECURITY_SEEKBAR_CURR);
-        for (int i = 0; i < body.size(); i++) {
+        adsListOfCategory.clear();
+        no_results_found.setVisibility(View.GONE);
+        if(body==null)
+        {
+            fetchAdsForCategory();
+        }
+        else
+        {
+            for (int i = 0; i < body.size(); i++) {
 
-            if (body.get(i).getRental_amount() <= Acquire.PRICE_SEEKBAR_CURR && body.get(i).getSecurity_deposit() <= Acquire.SECURITY_SEEKBAR_CURR)
-            {
-                Log.e("rikki  ", ""+body.get(i).getRental_option()+" "+ body.get(i).getRental_amount() + " deposit curr " + body.get(i).getRental_amount());
-
-
-                if (rental_options.get(R.id.ro_daily) && body.get(i).getRental_option().equals("Daily"))
+                if (body.get(i).getRental_amount() <= Acquire.PRICE_SEEKBAR_CURR && body.get(i).getSecurity_deposit() <= Acquire.SECURITY_SEEKBAR_CURR)
                 {
-                    if (Acquire.CONTDITITON.equals("Both") || Acquire.CONTDITITON.equals("0"))
+                    Log.e("rikki  ", ""+body.get(i).getRental_option()+" "+ body.get(i).getRental_amount() + " deposit curr " + body.get(i).getRental_amount());
+
+
+                    if (rental_options.get(R.id.ro_daily) && body.get(i).getRental_option().equals("Daily"))
+                    {
+                        if (Acquire.CONTDITITON.equals("Both") || Acquire.CONTDITITON.equals("0"))
+                            adsListOfCategory.add(body.get(i));
+                        else if (Acquire.CONTDITITON.equals(body.get(i).getCondition()))
+                            adsListOfCategory.add(body.get(i));
+                    }
+                    else if (rental_options.get(R.id.ro_weekly) && body.get(i).getRental_option().equals("Weekly"))
                         adsListOfCategory.add(body.get(i));
-                    else if (Acquire.CONTDITITON.equals(body.get(i).getCondition()))
+                    else if (rental_options.get(R.id.ro_monthly) && body.get(i).getRental_option().equals("Monthly"))
+                        adsListOfCategory.add(body.get(i));
+                    else if (rental_options.get(R.id.ro_occasional) && body.get(i).getRental_option().equals("Occasion"))
                         adsListOfCategory.add(body.get(i));
                 }
-                else if (rental_options.get(R.id.ro_weekly) && body.get(i).getRental_option().equals("Weekly"))
-                    adsListOfCategory.add(body.get(i));
-                else if (rental_options.get(R.id.ro_monthly) && body.get(i).getRental_option().equals("Monthly"))
-                    adsListOfCategory.add(body.get(i));
-                else if (rental_options.get(R.id.ro_occasional) && body.get(i).getRental_option().equals("Occasion"))
-                    adsListOfCategory.add(body.get(i));
             }
+            swipeRefreshLayout.setRefreshing(false);
         }
         condition = Acquire.CONTDITITON;
         rental_options = Acquire.RENTAL_OPTIONS;
         curr_rent_price = Acquire.PRICE_SEEKBAR_CURR;
         curr_deposit_price = Acquire.SECURITY_SEEKBAR_CURR;
         adsAdapter.notifyDataSetChanged();
-        swipeRefreshLayout.setRefreshing(false);
+        if(adsListOfCategory.size()==0)
+        {
+            no_results_found.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -204,6 +221,7 @@ public class AdsListFragment extends Fragment {
         Acquire.SECURITY_SEEKBAR_CURR = curr_deposit_price;
         Acquire.PRICE_SEEKBAR_CURR = curr_rent_price;
         Log.e("vhgv", ""+max_rent_price+" , "+ max_rent_price);
+
 
 
 

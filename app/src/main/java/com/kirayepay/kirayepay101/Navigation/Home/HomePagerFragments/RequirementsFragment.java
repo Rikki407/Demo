@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.Network.ApiClient;
@@ -49,6 +50,8 @@ public class RequirementsFragment extends Fragment
         recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setRefreshing(true);
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -83,6 +86,8 @@ public class RequirementsFragment extends Fragment
             @Override
             public void onFailure(Call<ArrayList<RequirementContainments>> call, Throwable t) {
                 Log.e("req_suc"," "+t.getCause()+t.getMessage());
+                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
 
             }
         });

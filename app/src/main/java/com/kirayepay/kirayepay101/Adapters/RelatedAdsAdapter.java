@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class RelatedAdsAdapter extends RecyclerView.Adapter<RelatedAdsAdapter.Re
         holder.ad_id = adsContainments.getAds_id();
         holder.cat_id = adsContainments.getCategory_id();
         holder.ad_title.setText(""+adsContainments.getAds_title());
+        Log.e("guthim",""+adsContainments.getAds_title());
 
         if(holder.ad_price!=null) holder.ad_price.setText((adsContainments.getRental_amount()==0)?"":"₹ "+adsContainments.getRental_amount());
         if(holder.ad_rental_option!=null) holder.ad_rental_option.setText((adsContainments.getRental_option().equals("0"))?"":"  /- "+adsContainments.getRental_option());

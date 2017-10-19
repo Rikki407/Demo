@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     tools:context="com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/no_result_text"
+        android:layout_marginTop="100dp"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:text="No Results "
+        />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_swipe_refresh_layout"
         android:layout_width="match_parent"
@@ -21,4 +30,4 @@
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+</RelativeLayout>
