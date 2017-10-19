@@ -85,7 +85,7 @@ public class SearchAdsFragment extends Fragment
         {
             no_results_found.setVisibility(View.VISIBLE);
         }
-        searchAdapter = new AdsAdapter(getActivity(),searchResults,gridLayoutManager, Acquire.NORMAL_CALL);
+        searchAdapter = new AdsAdapter(getActivity(),searchResults,gridLayoutManager, Acquire.MOSTVIEWED_CALL);
         recyclerView.setAdapter(searchAdapter);
 
         IntentFilter filter = new IntentFilter(ACTION_INTENT);

@@ -3,6 +3,7 @@ package com.kirayepay.kirayepay101.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -116,6 +117,9 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder>
         if(ads_contenments.getImage()!=null&&!ads_contenments.getImage().isEmpty()) // checking for null exceptions
         {
             Picasso.with(mContext).load(ads_contenments.getImage()).into(holder.ad_image);
+        }
+        else{
+            holder.ad_image.setImageResource(R.drawable.water_mark_3);
         }
 
     }
