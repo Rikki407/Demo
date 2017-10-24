@@ -44,7 +44,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/reqmnt_category"
                         android:gravity="center_vertical"
-                        android:padding="3dp"
                         android:background="@drawable/category_txt_view"
                         android:textColor="@color/kp_red"
                         android:hint=" -- "/>

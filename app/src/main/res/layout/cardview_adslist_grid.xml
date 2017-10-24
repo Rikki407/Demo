@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/grid_ad_image"
-                android:src="@drawable/water_mark_3"
+                app:srcCompat="@drawable/kp_wtr_mk"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:fitsSystemWindows="true"

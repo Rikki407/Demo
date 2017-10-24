@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             app:contentScrim="#FFFFFF"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:background="@drawable/water_mark_3"
+            android:background="@drawable/kp_wtr_mk"
             app:statusBarScrim="@android:color/transparent">
 
             <RelativeLayout
@@ -482,15 +482,5 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-    <!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@android:id/text1"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?android:attr/listPreferredItemHeight"-->
-    <!--android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"-->
-    <!--android:textAppearance="?android:attr/textAppearanceListItem"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:textAlignment="viewStart"-->
-    <!--/>-->
-
 
 </android.support.design.widget.CoordinatorLayout>

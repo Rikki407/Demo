@@ -28,7 +28,7 @@
                 android:adjustViewBounds="true"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
-                android:background="@drawable/water_mark_3" />
+                app:srcCompat="@drawable/kp_wtr_mk" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
+    android:clickable="true"
     tools:context="com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity">
     <TextView
         android:layout_width="wrap_content"
@@ -16,6 +18,25 @@
         android:visibility="gone"
         android:text="No Results "
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/refresh_layout"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:text="Connection Error \n Refresh Page!!!"
+            android:textColor="@color/cardTextColor"
+            />
+
+    </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_swipe_refresh_layout"
         android:layout_width="match_parent"
