@@ -18,6 +18,15 @@ public class Acquire {
     public static final int FACEBOOK_AUTH = 2;
     public static final int EMAIL_AUTH = 3;
 
+    public static final String LOCALITY = "loc";
+    public static final String CITY = "cit";
+    public static final String STATE = "sta";
+    public static final String DISTRICT = "dis";
+    public static final String PHONE = "pho";
+    public static final String PINCODE = "pin";
+
+
+
     public static final String USER_NAME="un";
     public static final String USER_ID="ui";
     public static final String USER_EMAIL="ue";

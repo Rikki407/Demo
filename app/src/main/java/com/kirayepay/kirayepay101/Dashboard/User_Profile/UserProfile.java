@@ -88,6 +88,11 @@ public class UserProfile extends AppCompatActivity
                     SharedPreferences.Editor editor = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE).edit();
                     editor.putString(Acquire.USER_NAME,up_name.getText().toString());
                     editor.apply();
+                    storeInfoInSharedPreference(up_phone.getText().toString(),up_city.getText().toString(),
+                            up_district.getText().toString(),up_locality.getText().toString(),up_state.getText().toString(),
+                            up_pincode.getText().toString());
+
+
                 }
             }
             @Override
@@ -108,11 +113,14 @@ public class UserProfile extends AppCompatActivity
                 SellerContainments seller = response.body().getSeller().get(0);
                 up_name.setText(""+seller.getName());
                 up_phone.setText(""+seller.getPhone());
-                up_city.setText(""+seller.getCity());
-                up_district.setText(""+seller.getDistrict());
-                up_locality.setText(""+seller.getLocality());
-                up_state.setText(""+seller.getState());
-                up_pincode.setText(""+seller.getPincode());
+                if(seller.getCity()!=null)up_city.setText(""+seller.getCity());
+                if(seller.getDistrict()!=null)up_district.setText(""+seller.getDistrict());
+                if(seller.getLocality()!=null)up_locality.setText(""+seller.getLocality());
+                if(seller.getState()!=null)up_state.setText(""+seller.getState());
+                if(seller.getPincode()!=0)up_pincode.setText(""+seller.getPincode());
+                storeInfoInSharedPreference(""+seller.getPhone(),""+seller.getCity(),
+                        ""+seller.getDistrict(),""+seller.getLocality(),""+seller.getState(),""+seller.getPincode());
+
             }
 
             @Override
@@ -120,5 +128,17 @@ public class UserProfile extends AppCompatActivity
 
             }
         });
+    }
+
+    private void  storeInfoInSharedPreference( String phone, String city, String district, String locality, String state, String pincode) {
+        SharedPreferences.Editor editor = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE).edit();
+        editor.putString(Acquire.LOCALITY,locality);
+        editor.putString(Acquire.CITY,city);
+        editor.putString(Acquire.STATE,state);
+        editor.putString(Acquire.DISTRICT,district);
+        editor.putString(Acquire.PHONE,phone);
+        editor.putString(Acquire.PINCODE,pincode);
+        editor.apply();
+
     }
 }

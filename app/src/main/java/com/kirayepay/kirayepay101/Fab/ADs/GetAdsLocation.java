@@ -1,5 +1,6 @@
 package com.kirayepay.kirayepay101.Fab.ADs;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kirayepay.kirayepay101.Network.ApiClient;
@@ -38,12 +40,21 @@ public class GetAdsLocation extends AppCompatActivity {
     RequestBody filename;
     MultipartBody.Part other_image_1 = null, other_image_2 = null, other_image_3 = null, other_image_4 = null;
     int main_cat_id,sub_cat_1_id,sub_cat_2_id;
+    private EditText Locality,City,State,District,Phone,Pincode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_location);
         Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
+        Locality = (EditText)findViewById(R.id.post_ads_locality);
+        City = (EditText)findViewById(R.id.post_ads_city);
+        State = (EditText)findViewById(R.id.post_ads_state);
+        District = (EditText)findViewById(R.id.post_ads_destrict);
+        Phone = (EditText)findViewById(R.id.post_ads_phone);
+        Pincode = (EditText)findViewById(R.id.post_ads_pincode);
+
+        setEditTexts();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -91,6 +102,17 @@ public class GetAdsLocation extends AppCompatActivity {
         });
     }
 
+    private void setEditTexts() {
+        SharedPreferences prefs = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
+        Locality.setText(prefs.getString(Acquire.LOCALITY,""));
+        City.setText(prefs.getString(Acquire.CITY,""));
+        State.setText(prefs.getString(Acquire.STATE,""));
+        District.setText(prefs.getString(Acquire.DISTRICT,""));
+        Phone.setText(prefs.getString(Acquire.PHONE,""));
+        Pincode.setText(prefs.getString(Acquire.PINCODE,""));
+
+    }
+
     private void postTheAd() {
 //        Log.e("All Fields",sd_string+", "+cond_string+", "+ro_string+", "+ ra_string+", "+desc_string+", "+tite_string+", "+man_string+", "+quan_string+", "+main_cat_id+", "+sub_cat_1_id+", "+sub_cat_2_id);
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ""+tite_string);
@@ -100,6 +122,10 @@ public class GetAdsLocation extends AppCompatActivity {
         RequestBody condition = RequestBody.create(MediaType.parse("text/plain"), ""+cond_string);
         RequestBody quantity = RequestBody.create(MediaType.parse("text/plain"), ""+quan_string);
         RequestBody rental_option = RequestBody.create(MediaType.parse("text/plain"), ""+ro_string);
+        RequestBody security_deposit = RequestBody.create(MediaType.parse("text/plain"), ""+sd_string);
+        RequestBody manufacture = RequestBody.create(MediaType.parse("text/plain"), ""+man_string);
+        RequestBody rental_amount = RequestBody.create(MediaType.parse("text/plain"), ""+ra_string);
+
         RequestBody locality = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
         RequestBody city = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
         RequestBody pincode = RequestBody.create(MediaType.parse("text/plain"), "110075");
@@ -117,15 +143,15 @@ public class GetAdsLocation extends AppCompatActivity {
         {
             Log.e("itenom", "heretoo"+Acquire.CALL_WITH_IMAGES);
 
-            postAdCall = apiInterface.postAds(title, description, category, availability, condition, quantity,
-                    rental_option, locality, city, pincode, state, district, phone);
+            postAdCall = apiInterface.postAds(title, description, category,manufacture, availability, condition, quantity,
+                    rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone);
         }
         else {
             Log.e("itenom", "heretx"+Acquire.CALL_WITH_IMAGES);
 
-            postAdCall =apiInterface.postAdsWithImage(title, description, category, availability, condition, quantity,
-                    rental_option, locality, city, pincode, state, district, phone, main_image, filename, other_image_1, other_image_2,
-                    other_image_3, other_image_4);
+            postAdCall =apiInterface.postAdsWithImage(title, description, category,manufacture, availability, condition, quantity,
+                    rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone, main_image, filename,
+                    other_image_1, other_image_2, other_image_3, other_image_4);
         }
         postAdCall.enqueue(new Callback<PostContainments>() {
 

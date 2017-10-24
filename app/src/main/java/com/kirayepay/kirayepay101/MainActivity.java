@@ -294,6 +294,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             searchView.closeSearch();
             return;
         }
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            return;
+        }
         super.onBackPressed();
     }
 
