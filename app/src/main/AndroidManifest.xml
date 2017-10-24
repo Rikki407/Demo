@@ -14,9 +14,9 @@
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/kp_square"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/kp_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -29,14 +29,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
         </activity>
         <activity
             android:name=".AdsOfCategory.AdsByCategoryActivity"
@@ -75,8 +67,6 @@
             >
             <intent-filter>
 
-                <!-- <action android:name="android.intent.action.MAIN" /> -->
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="@string/fb_login_protocol_scheme" />
@@ -87,16 +77,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
-            <!-- <data android:scheme="@string/fb_login_protocol_scheme" /> -->
-            <!-- </intent-filter> -->
-
         </activity>
         <activity
             android:name=".SplashScreen"

@@ -41,8 +41,6 @@ public class UserAdsFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v  = inflater.inflate(R.layout.recyclerview_adslist,container,false);
-        SharedPreferences prefs = getActivity().getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
-        user_id = prefs.getString(Acquire.USER_ID,null);
         recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);
         recyclerView.getItemAnimator().setChangeDuration(600);
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
@@ -56,7 +54,9 @@ public class UserAdsFragment extends Fragment
 
     private void fetchUserAds() {
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Call<ArrayList<AdsContainments>> arrayListCall = apiInterface.getUserAds("315", Acquire.API_KEY);
+        SharedPreferences prefs = getActivity().getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
+        user_id = prefs.getString(Acquire.USER_ID,"");
+        Call<ArrayList<AdsContainments>> arrayListCall = apiInterface.getUserAds(user_id, Acquire.API_KEY);
 
         arrayListCall.enqueue(new Callback<ArrayList<AdsContainments>>() {
             @Override

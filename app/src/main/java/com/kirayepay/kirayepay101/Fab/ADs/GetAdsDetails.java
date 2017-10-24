@@ -3,7 +3,6 @@ package com.kirayepay.kirayepay101.Fab.ADs;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.R;
-import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.RikkiClasses.CategoryHierarchy;
 
 import java.util.ArrayList;
@@ -76,6 +73,10 @@ public class GetAdsDetails extends AppCompatActivity {
                 if (tite_string.isEmpty() || sd_string.isEmpty() || desc_string.isEmpty() || ra_string.isEmpty() || man_string.isEmpty() || quan_string.isEmpty() || cond_string.isEmpty()) {
                     Toast.makeText(mContext, "Please Fill All The Fields", Toast.LENGTH_SHORT).show();
                 } else {
+                    if(subcat1_text.getText().toString().isEmpty()) sub_cat_1_id = -1;
+
+                    if(subcat2_text.getText().toString().isEmpty()) sub_cat_2_id = -1;
+
                     Log.e("show_uri", "" + main_img_uri);
                     intent2.putExtra("main_uri", main_img_uri);
                     intent2.putExtra("other_uri_1", other_img_uri_1);

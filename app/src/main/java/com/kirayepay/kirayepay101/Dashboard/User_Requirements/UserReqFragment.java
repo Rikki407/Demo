@@ -35,15 +35,11 @@ public class UserReqFragment extends Fragment
     ArrayList<RequirementContainments> userReqList;
     public RequirementsAdapter requirementsAdapter;
     public GridLayoutManager gridLayoutManager;
-    String user_id;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v  = inflater.inflate(R.layout.recyclerview_adslist,container,false);
-        SharedPreferences prefs = getActivity().getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
-        user_id = prefs.getString(Acquire.USER_ID,null);
-        user_id = ""+315;
         recyclerView = (RecyclerView) v.findViewById(R.id.ads_recycler_list);
         recyclerView.getItemAnimator().setChangeDuration(600);
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
@@ -57,6 +53,8 @@ public class UserReqFragment extends Fragment
 
     private void fetchUserRequirements() {
         ApiInterface apiInterface = ApiClient.getApiInterface();
+        SharedPreferences prefs = getActivity().getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
+        String user_id = prefs.getString(Acquire.USER_ID,"");
         Call<ArrayList<RequirementContainments>> arrayListCall = apiInterface.getUserRequirements(user_id, Acquire.API_KEY);
 
         arrayListCall.enqueue(new Callback<ArrayList<RequirementContainments>>() {

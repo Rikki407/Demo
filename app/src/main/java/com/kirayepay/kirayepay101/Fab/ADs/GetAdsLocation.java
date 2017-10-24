@@ -1,5 +1,7 @@
 package com.kirayepay.kirayepay101.Fab.ADs;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,7 +14,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.kirayepay.kirayepay101.Authentication.SigninActivity;
+import com.kirayepay.kirayepay101.MainActivity;
 import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
 import com.kirayepay.kirayepay101.Network.Responses.PostContainments;
@@ -36,6 +41,7 @@ public class GetAdsLocation extends AppCompatActivity {
     private String m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
             sd_string, cond_string, ro_string, ra_string, desc_string, tite_string, man_string, quan_string;
     private TextView post_this_ad;
+    Context mContext;
     MultipartBody.Part main_image=null;
     RequestBody filename;
     MultipartBody.Part other_image_1 = null, other_image_2 = null, other_image_3 = null, other_image_4 = null;
@@ -45,6 +51,7 @@ public class GetAdsLocation extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext=this;
         setContentView(R.layout.get_location);
         Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
         Locality = (EditText)findViewById(R.id.post_ads_locality);
@@ -118,24 +125,27 @@ public class GetAdsLocation extends AppCompatActivity {
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ""+tite_string);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ""+desc_string);
         RequestBody category = RequestBody.create(MediaType.parse("text/plain"), ""+main_cat_id);
+
+        RequestBody sub_cat1 = RequestBody.create(MediaType.parse("text/plain"), ""+sub_cat_1_id);
+        RequestBody sub_cat2 = RequestBody.create(MediaType.parse("text/plain"), ""+sub_cat_2_id);
+
         RequestBody availability = RequestBody.create(MediaType.parse("text/plain"), "yes");
         RequestBody condition = RequestBody.create(MediaType.parse("text/plain"), ""+cond_string);
         RequestBody quantity = RequestBody.create(MediaType.parse("text/plain"), ""+quan_string);
         RequestBody rental_option = RequestBody.create(MediaType.parse("text/plain"), ""+ro_string);
         RequestBody security_deposit = RequestBody.create(MediaType.parse("text/plain"), ""+sd_string);
-        RequestBody manufacture = RequestBody.create(MediaType.parse("text/plain"), ""+man_string);
+        final RequestBody manufacture = RequestBody.create(MediaType.parse("text/plain"), ""+man_string);
         RequestBody rental_amount = RequestBody.create(MediaType.parse("text/plain"), ""+ra_string);
 
-        RequestBody locality = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
-        RequestBody city = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
-        RequestBody pincode = RequestBody.create(MediaType.parse("text/plain"), "110075");
-        RequestBody state = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
-        RequestBody district = RequestBody.create(MediaType.parse("text/plain"), "Dwarka");
-        RequestBody phone = RequestBody.create(MediaType.parse("text/plain"), "9958702304");
+        RequestBody locality = RequestBody.create(MediaType.parse("text/plain"), Locality.getText().toString());
+        RequestBody city = RequestBody.create(MediaType.parse("text/plain"), City.getText().toString());
+        RequestBody pincode = RequestBody.create(MediaType.parse("text/plain"), Pincode.getText().toString());
+        RequestBody state = RequestBody.create(MediaType.parse("text/plain"), State.getText().toString());
+        RequestBody district = RequestBody.create(MediaType.parse("text/plain"), District.getText().toString());
+        RequestBody phone = RequestBody.create(MediaType.parse("text/plain"), Phone.getText().toString());
 
         ApiInterface apiInterface = ApiClient.getApiInterface();
 
-        Log.e("itenom", "here "+""+main_image+" : "+m_img_uri_str);
 
         Call<PostContainments> postAdCall ;
 
@@ -143,13 +153,18 @@ public class GetAdsLocation extends AppCompatActivity {
         {
             Log.e("itenom", "heretoo"+Acquire.CALL_WITH_IMAGES);
 
-            postAdCall = apiInterface.postAds(title, description, category,manufacture, availability, condition, quantity,
+            if(sub_cat_1_id==-1) sub_cat1=null;
+
+            if(sub_cat_2_id==-1) sub_cat2=null;
+
+
+            postAdCall = apiInterface.postAds(title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone);
         }
         else {
             Log.e("itenom", "heretx"+Acquire.CALL_WITH_IMAGES);
 
-            postAdCall =apiInterface.postAdsWithImage(title, description, category,manufacture, availability, condition, quantity,
+            postAdCall =apiInterface.postAdsWithImage(title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone, main_image, filename,
                     other_image_1, other_image_2, other_image_3, other_image_4);
         }
@@ -159,12 +174,17 @@ public class GetAdsLocation extends AppCompatActivity {
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
                 if (response.isSuccessful()) {
                     Log.e("posted", "kmlkm" + response.body().getMessage());
+                    Toast.makeText(mContext,"Ad Posted",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(mContext,MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
                 Log.e("cannot_post", "kkk" + t.getCause() + t.getMessage());
+                Toast.makeText(mContext,"Can't Post Ad",Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
 
@@ -216,7 +236,7 @@ public class GetAdsLocation extends AppCompatActivity {
     private String getRealPathFromURIPath(Uri contentURI, AppCompatActivity activity) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) { // Source is Dropbox or other similar local file path
+        if (cursor == null) {
             result = contentURI.getPath();
         } else {
             cursor.moveToFirst();

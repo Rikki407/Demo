@@ -1,16 +1,24 @@
 package com.kirayepay.kirayepay101;
 
+import android.*;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     NavigationFragment navigationFragment;
     private boolean SearchViewOpen = false;
     private HashMap<Integer,ArrayList<CategoriesContainments>> subcategories;
@@ -76,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        checkPermissionREAD_EXTERNAL_STORAGE(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("KirayePay");
         toolbar.setNavigationIcon(R.drawable.bottom_nav_menu);
@@ -300,7 +310,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         super.onBackPressed();
     }
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showDialog("External storage", context, android.Manifest.permission.READ_EXTERNAL_STORAGE, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
 
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    (Activity) context,
+                                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+
+                return false;
+            } else {
+
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    }
+    public void showDialog(final String msg, final Context context,
+                           final String permission, final int myPermissionsRequestCamera) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[]{permission},
+                                myPermissionsRequestCamera);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

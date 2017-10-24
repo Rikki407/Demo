@@ -17,7 +17,6 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:id="@+id/grid_req_image"
-                android:src="@mipmap/ic_launcher_round"
                 android:layout_gravity="center"
                 />
             <LinearLayout

@@ -62,7 +62,7 @@ public class SplashScreen extends AppCompatActivity
         title_image.startAnimation(myFadeInAnimation);
         logo_image.clearAnimation();
         TranslateAnimation transAnim = new TranslateAnimation(0, 0, 0,
-                getDisplayHeight()/2.5f);
+                getDisplayHeight()/2.6f);
         transAnim.setStartOffset(450);
         transAnim.setDuration(2200);
         transAnim.setFillAfter(true);

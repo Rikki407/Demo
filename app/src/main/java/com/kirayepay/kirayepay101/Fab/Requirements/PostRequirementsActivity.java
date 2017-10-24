@@ -3,6 +3,8 @@ package com.kirayepay.kirayepay101.Fab.Requirements;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kirayepay.kirayepay101.MainActivity;
+import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.RikkiClasses.CategoryHierarchy;
 import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
@@ -41,7 +45,7 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
     Context mContext;
     CardView subcat_1_card, subcat_2_card;
     ArrayAdapter<String> main_adapter, sub_1_adapter, sub_2_adapter;
-
+    String user_id;
     private int main_cat_id = -1, sub_cat_1_id = -1, sub_cat_2_id = -1;
 
     @Override
@@ -49,6 +53,9 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_requirements);
         mContext = this;
+
+        SharedPreferences prefs = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
+        user_id = prefs.getString(Acquire.USER_ID,"");
 
         subcat_1_card = (CardView) findViewById(R.id.sub_1_cat_card);
         subcat_2_card = (CardView) findViewById(R.id.sub_2_cat_card);
@@ -222,18 +229,24 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
     private void postThisRequirement() {
 
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Call<PostContainments> postReqCall = apiInterface.postRequirements("216", "Football", "15", "In need of a football"
-                , "2017-09-2", "2017-10-11");
+        Log.e("ghi",user_id+" "+title.getText().toString()+" "+main_cat_id+" "+requirement.getText().toString()+" "+from.getText().toString()+" "+till.getText().toString());
+
+        String sub_cat = (subcat1_text.getText().toString().isEmpty())? null:""+sub_cat_1_id;
+        String sub_cat2 = (subcat2_text.getText().toString().isEmpty())? null:""+sub_cat_2_id;
+
+        Call<PostContainments> postReqCall = apiInterface.postRequirements(user_id,title.getText().toString(),""+main_cat_id,sub_cat,sub_cat2,requirement.getText().toString(),from.getText().toString(),till.getText().toString());
         postReqCall.enqueue(new Callback<PostContainments>() {
             @Override
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
-                Toast.makeText(PostRequirementsActivity.this, "Posted", Toast.LENGTH_LONG).show();
-                Log.e("post_req", "" + response.body().getMessage());
+                Toast.makeText(PostRequirementsActivity.this, "Requirement Posted", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(mContext,MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
             }
 
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
-                Toast.makeText(PostRequirementsActivity.this, "Not Posted", Toast.LENGTH_LONG).show();
+                Toast.makeText(PostRequirementsActivity.this, "Can Not Post Requirement", Toast.LENGTH_LONG).show();
                 Log.e("not_post_req", "" + t.getMessage());
             }
         });
@@ -254,6 +267,9 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
                     from_time = mcurrentDate.getTimeInMillis();
                     Log.e("fromdate1 ", "" + mcurrentDate.getTimeInMillis());
                 }
+                else{
+                    till_time = mcurrentDate.getTimeInMillis();
+                }
             }
         }, mYear, mMonth, mDay);
         mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -265,6 +281,11 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post_req_bttn:
+                if(category_text.getText().toString().isEmpty()||title.getText().toString().isEmpty()||requirement.getText().toString().isEmpty()||from.getText().toString().isEmpty()||till.getText().toString().isEmpty())
+                {
+                    Toast.makeText(mContext,"Please fill all the fields",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 postThisRequirement();
                 break;
             case R.id.post_req_from:

@@ -64,6 +64,8 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.get_images);
         values = new ContentValues();
         mContext = this;
+        checkPermissionREAD_EXTERNAL_STORAGE(mContext);
+        checkPermissionForCamera(mContext,124);
         main_image = (ImageView) findViewById(R.id.main_image_prev);
         main_image_plus = (CardView) findViewById(R.id.main_image_plus);
         main_image_cross = (CardView) findViewById(R.id.main_image_cross);
@@ -203,12 +205,12 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
                 }
                 return false;
             } else {
-
                 return true;
             }
         } else {
             return true;
         }
+
 
     }
 
@@ -220,19 +222,29 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
                 if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     showDialog("External storage", context, Manifest.permission.READ_EXTERNAL_STORAGE, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
 
-                } else {
+                }
+                else {
                     ActivityCompat
                             .requestPermissions(
                                     (Activity) context,
                                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    checkPermissionForCamera(mContext,124);
                 }
+                checkPermissionForCamera(mContext,124);
+
                 return false;
-            } else {
+            }
+            else {
+                checkPermissionForCamera(mContext,124);
+
                 return true;
             }
 
-        } else {
+        }
+        else {
+            checkPermissionForCamera(mContext,124);
+
             return true;
         }
     }
