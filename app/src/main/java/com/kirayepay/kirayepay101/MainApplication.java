@@ -2,6 +2,7 @@ package com.kirayepay.kirayepay101;
 
 import android.app.Application;
 import android.os.StrictMode;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -19,6 +20,7 @@ public class MainApplication extends Application
     @Override
     public void onCreate() {
         super.onCreate();
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         String ip = getLocalIpAddress();

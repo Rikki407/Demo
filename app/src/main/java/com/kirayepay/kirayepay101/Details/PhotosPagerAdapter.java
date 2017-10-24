@@ -1,38 +1,30 @@
 package com.kirayepay.kirayepay101.Details;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
 
 import com.kirayepay.kirayepay101.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rikki on 10/9/17.
  */
 
-public class PhotosPagerAdapter extends PagerAdapter
-{
+public class PhotosPagerAdapter extends PagerAdapter {
     Activity activity;
     ArrayList<String> other_images;
     CollapsingToolbarLayout collapsingToolbarLayout;
+
     public PhotosPagerAdapter(Activity activity, ArrayList<String> other_images, CollapsingToolbarLayout collapsingToolbarLayout) {
         this.activity = activity;
         this.other_images = other_images;
@@ -46,14 +38,14 @@ public class PhotosPagerAdapter extends PagerAdapter
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         this.activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.view_pager_image);
-        Log.e("show_images"," "+other_images.get(position));
+        Log.e("show_images", " " + other_images.get(position));
         Picasso.with(activity).load(other_images.get(position)).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
-                if(position==0) {
+                if (position == 0) {
                     double viewWidth = displayMetrics.widthPixels;
-                    Log.e("mah_width",""+viewWidth);
-                    collapsingToolbarLayout.getLayoutParams().height = (int)viewWidth;
+                    Log.e("mah_width", "" + viewWidth);
+                    collapsingToolbarLayout.getLayoutParams().height = (int) viewWidth;
                 }
             }
 
@@ -74,8 +66,9 @@ public class PhotosPagerAdapter extends PagerAdapter
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view ==  object;
+        return view == object;
     }
+
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         // TODO Auto-generated method stub

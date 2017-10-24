@@ -2,6 +2,7 @@ package com.kirayepay.kirayepay101.Navigation.Menu.AllCategoriesList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,7 @@ public class SubCategoriesAdapter extends BaseExpandableListAdapter
             });
 
             if (isExpanded) {
+
                 holder.expColImageView.setImageResource(R.drawable.collapse_circle);
             }
             else {

@@ -170,9 +170,9 @@ public class AdsListFragment extends Fragment {
         curr_rent_price = Acquire.PRICE_SEEKBAR_CURR;
         curr_deposit_price = Acquire.SECURITY_SEEKBAR_CURR;
         adsAdapter.notifyDataSetChanged();
-        if(adsListOfCategory.size()==0)
-        {
-            no_results_found.setVisibility(View.VISIBLE);
+
+        if(adsListOfCategory.size()==0) {
+            no_results_found.setVisibility(View.GONE);
         }
 
     }

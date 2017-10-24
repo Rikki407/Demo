@@ -14,8 +14,8 @@ public class EmailRegisterResponse
     private String status;
     @SerializedName("user_id")
     private int id;
-    @SerializedName("error")
-    private ErrorResponse error;
+    @SerializedName("errors")
+    private ErrorResponse errors;
 
     public int getId() {
         return id;
@@ -30,6 +30,6 @@ public class EmailRegisterResponse
     }
 
     public ErrorResponse getError() {
-        return error;
+        return errors;
     }
 }

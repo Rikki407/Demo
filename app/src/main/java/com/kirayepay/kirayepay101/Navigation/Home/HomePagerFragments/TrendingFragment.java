@@ -79,7 +79,6 @@ public class TrendingFragment extends Fragment
             @Override
             public void onFailure(Call<TrendingContainments> call, Throwable t) {
                 Log.e("trendingfragment", t.getMessage());
-                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

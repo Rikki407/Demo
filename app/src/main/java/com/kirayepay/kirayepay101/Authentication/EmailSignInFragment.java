@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.MainActivity;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -52,7 +53,17 @@ public class EmailSignInFragment extends Fragment implements View.OnClickListene
         switch (v.getId())
         {
             case R.id.sign_in_button :
-                emailLogin("9958692304","1234567890");
+                if(user_email.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Enter Email",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(user_password.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Enter Password",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                emailLogin(user_email.getText().toString(),user_password.getText().toString());
                 break;
         }
     }
@@ -64,16 +75,18 @@ public class EmailSignInFragment extends Fragment implements View.OnClickListene
         emailLoginCall.enqueue(new Callback<ArrayList<EmailLoginResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<EmailLoginResponse>> call, Response<ArrayList<EmailLoginResponse>> response) {
-                Log.e("EmailResponse","Logged In");
-                EmailLoginResponse loginResponse = response.body().get(0);
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                storeInfoInSharedPreference(loginResponse.getEmail(),loginResponse.getUserid(),loginResponse.getName(),Acquire.EMAIL_AUTH);
-                startActivity(intent);
+
+                    EmailLoginResponse loginResponse = response.body().get(0);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    storeInfoInSharedPreference(loginResponse.getEmail(), loginResponse.getUserid(), loginResponse.getName(), Acquire.EMAIL_AUTH);
+                    startActivity(intent);
             }
             @Override
             public void onFailure(Call<ArrayList<EmailLoginResponse>> call, Throwable t) {
                 Log.e("EmailResponse","Error "+t.getCause());
+                Toast.makeText(getActivity(),"Username or password incorrect",Toast.LENGTH_SHORT).show();
+
             }
         });
     }

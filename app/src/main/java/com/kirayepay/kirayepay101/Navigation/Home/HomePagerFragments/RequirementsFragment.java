@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -30,7 +34,7 @@ import retrofit2.Response;
  * Created by rikki on 8/3/17.
  */
 
-public class RequirementsFragment extends Fragment
+public class RequirementsFragment extends Fragment implements View.OnClickListener
 {
     public static RequirementsFragment newInstance()
     {
@@ -42,6 +46,8 @@ public class RequirementsFragment extends Fragment
     public GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private LinearLayout refresh_layout;
+
 
     @Nullable
     @Override
@@ -51,6 +57,7 @@ public class RequirementsFragment extends Fragment
         gridLayoutManager = new GridLayoutManager(getActivity(),1);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
         swipeRefreshLayout.setRefreshing(true);
+        refresh_layout = (LinearLayout) v.findViewById(R.id.refresh_layout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -64,11 +71,13 @@ public class RequirementsFragment extends Fragment
         mostViewedAds  = new ArrayList<>();
         requirementsAdapter = new RequirementsAdapter(getActivity(),mostViewedAds,gridLayoutManager, Acquire.NORMAL_CALL);
         recyclerView.setAdapter(requirementsAdapter);
+        refresh_layout.setOnClickListener(this);
         fetchAllRequirements();
         return v;
     }
     private void fetchAllRequirements()
     {
+        refresh_layout.setVisibility(View.GONE);
         ApiInterface apiInterface = ApiClient.getApiInterface();
         Call<ArrayList<RequirementContainments>> arrayListCall = apiInterface.getAllRequirements(Acquire.API_KEY);
 
@@ -86,10 +95,22 @@ public class RequirementsFragment extends Fragment
             @Override
             public void onFailure(Call<ArrayList<RequirementContainments>> call, Throwable t) {
                 Log.e("req_suc"," "+t.getCause()+t.getMessage());
-                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
+                if(mostViewedAds.size()==0) refresh_layout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(false);
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.refresh_layout :
+                swipeRefreshLayout.setRefreshing(true);
+                Toast.makeText(getActivity(),"kzjdbcakj",Toast.LENGTH_LONG).show();
+                fetchAllRequirements();
+                break;
+        }
     }
 }

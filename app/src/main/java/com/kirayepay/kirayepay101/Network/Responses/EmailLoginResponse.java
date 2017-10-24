@@ -20,6 +20,18 @@ public class EmailLoginResponse
     private String role;
     @SerializedName("permission")
     private String permission;
+    @SerializedName("message")
+    private String message;
+    @SerializedName("status")
+    private String status;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public String getUserid() {
         return userid;

@@ -43,7 +43,7 @@ public class SplashScreen extends AppCompatActivity
             public void run() {
                 try {
                     super.run();
-                    sleep(2200);  //Delay of 4.0 seconds
+                    sleep(3000);  //Delay of 4.0 seconds
                 } catch (Exception e) {
                 } finally {
                     // opening main activity if user has already signed in or SigninActivity in the other case
@@ -62,8 +62,8 @@ public class SplashScreen extends AppCompatActivity
         title_image.startAnimation(myFadeInAnimation);
         logo_image.clearAnimation();
         TranslateAnimation transAnim = new TranslateAnimation(0, 0, 0,
-                getDisplayHeight()/2.6f);
-        transAnim.setStartOffset(0);
+                getDisplayHeight()/2.5f);
+        transAnim.setStartOffset(450);
         transAnim.setDuration(2200);
         transAnim.setFillAfter(true);
         transAnim.setInterpolator(new BounceInterpolator());
@@ -83,14 +83,7 @@ public class SplashScreen extends AppCompatActivity
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Log.e("yo",
-                        "Ending button dropdown animation. Clearing animation and setting layout");
-//                imageView.clearAnimation();
-//                final int left = imageView.getLeft();
-//                final int top = imageView.getTop();
-//                final int right = imageView.getRight();
-//                final int bottom = imageView.getBottom();
-//                imageView.layout(left, top, right, bottom);
+                Log.e("yo", "Ending button dropdown animation. Clearing animation and setting layout");
             }
         });
         logo_image.startAnimation(transAnim);

@@ -2,6 +2,7 @@ package com.kirayepay.kirayepay101.Navigation.Menu.AllCategoriesList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,9 +109,12 @@ public class MainCategoriesAdapter extends BaseExpandableListAdapter {
                 }
             });
             if (isExpanded) {
+//                VectorDrawableCompat collapse_circle_drawable = VectorDrawableCompat.create(context.getResources(), R.drawable.collapse_circle, null);
+
                 holder.expColImageView.setImageResource(R.drawable.collapse_circle);
             }
             else {
+//                VectorDrawableCompat expand_circle_drawable = VectorDrawableCompat.create(context.getResources(), R.drawable.expand_circle, null);
                 holder.expColImageView.setImageResource(R.drawable.expand_circle);
             }
         }

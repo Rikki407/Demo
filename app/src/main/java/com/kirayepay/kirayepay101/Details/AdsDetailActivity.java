@@ -1,7 +1,5 @@
 package com.kirayepay.kirayepay101.Details;
 
-import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +8,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,23 +20,17 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity;
 import com.kirayepay.kirayepay101.MainActivity;
-import com.kirayepay.kirayepay101.Navigation.Home.HomePagerFragments.MostViewedFragment;
-import com.kirayepay.kirayepay101.Navigation.NavigationFragment;
 import com.kirayepay.kirayepay101.Network.Responses.AdsResponse;
 import com.kirayepay.kirayepay101.Network.Responses.PostContainments;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
-import com.kirayepay.kirayepay101.Network.Responses.AdsContainments;
 import com.kirayepay.kirayepay101.R;
-import com.kirayepay.kirayepay101.Search.SearchPagerFragments.SearchAdsFragment;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -91,7 +79,7 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
 
         photosPagerAdapter = new PhotosPagerAdapter(this,other_images,collapsing_toolbar);
         photosPager.setAdapter(photosPagerAdapter);
-        photosPager.setOffscreenPageLimit(0);
+        photosPager.setOffscreenPageLimit(2);
         photosPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

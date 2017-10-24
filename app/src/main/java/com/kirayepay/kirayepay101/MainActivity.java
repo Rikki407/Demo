@@ -7,10 +7,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -52,6 +54,11 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+    NavigationFragment navigationFragment;
+    private boolean SearchViewOpen = false;
     private HashMap<Integer,ArrayList<CategoriesContainments>> subcategories;
     private Context mContext=this;
     private MaterialSearchView searchView;
@@ -64,8 +71,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        navigationFragment = new NavigationFragment();
+
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("KirayePay");
         toolbar.setNavigationIcon(R.drawable.bottom_nav_menu);
@@ -118,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
+                SearchViewOpen = true;
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.left_in,R.anim.left_out);
                 fragmentTransaction.replace(R.id.main_container, new SearchFragment());
@@ -126,16 +137,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onSearchViewClosed() {
+                SearchViewOpen = false;
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.right_in,R.anim.right_out);
-                fragmentTransaction.replace(R.id.main_container, new NavigationFragment());
+                fragmentTransaction.replace(R.id.main_container, navigationFragment);
                 fragmentTransaction.commit();
             }
         });
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkStateReceiver, filter);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new NavigationFragment());
+        fragmentTransaction.replace(R.id.main_container, navigationFragment);
         fragmentTransaction.commit();
     }
 
@@ -190,13 +202,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onConnectionLost() {
         Acquire.NETWORK_CONNECTED=false;
-        Toast.makeText(this, "Connection lost", Toast.LENGTH_LONG).show();
     }
 
     public void onConnectionFound() {
         Acquire.NETWORK_CONNECTED=true;
         fetchAllCategories();
-        Toast.makeText(this, "Connection found", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -217,15 +227,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void signOutTheUser()
     {
         if (Auth_Method == Acquire.FACEBOOK_AUTH) {
-            Log.e("facebooklogout","yep");
             LoginManager.getInstance().logOut();
         }
-        //09-06 15:42:18.353 3121-3121/com.kirayepay.kirayepay101 E/userdetails:  356 ramlamda@gmail.com Rishab 3
-
 
         else if(Auth_Method== Acquire.GOOGLE_AUTH)
         {
-            Log.e("googlelogout","yep");
             Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                     new ResultCallback<Status>() {
                         @Override
@@ -240,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void gotoSignInActivity() {
         setValuesToDefault();
         Intent intent = new Intent(mContext, SigninActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -278,6 +285,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(SearchViewOpen)
+        {
+            searchView.closeSearch();
+            return;
+        }
+        super.onBackPressed();
     }
 
     @Override

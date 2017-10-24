@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -119,7 +120,7 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder>
             Picasso.with(mContext).load(ads_contenments.getImage()).into(holder.ad_image);
         }
         else{
-            holder.ad_image.setImageResource(R.drawable.water_mark_3);
+            holder.ad_image.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.kp_wtr_mk));
         }
 
     }

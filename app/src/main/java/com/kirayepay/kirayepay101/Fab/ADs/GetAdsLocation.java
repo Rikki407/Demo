@@ -31,11 +31,13 @@ import retrofit2.Response;
  */
 
 public class GetAdsLocation extends AppCompatActivity {
-    private String m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4;
+    private String m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
+            sd_string, cond_string, ro_string, ra_string, desc_string, tite_string, man_string, quan_string;
     private TextView post_this_ad;
     MultipartBody.Part main_image=null;
     RequestBody filename;
     MultipartBody.Part other_image_1 = null, other_image_2 = null, other_image_3 = null, other_image_4 = null;
+    int main_cat_id,sub_cat_1_id,sub_cat_2_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +52,17 @@ public class GetAdsLocation extends AppCompatActivity {
             o_img_uri_str_2 = bundle.getString("other_uri_2");
             o_img_uri_str_3 = bundle.getString("other_uri_3");
             o_img_uri_str_4 = bundle.getString("other_uri_4");
+            tite_string = bundle.getString("title");
+            desc_string = bundle.getString("description");
+            man_string = bundle.getString("manufacture");
+            quan_string = bundle.getString("quantity");
+            ra_string = bundle.getString("rental_amount");
+            sd_string = bundle.getString("security_deposit");
+            cond_string = bundle.getString("conditions");
+            ro_string = bundle.getString("rental_option");
+            main_cat_id = bundle.getInt("main_cat_id");
+            sub_cat_1_id = bundle.getInt("sub_cat_1_id");
+            sub_cat_2_id = bundle.getInt("sub_cat_2_id");
         }
 
         if (m_img_uri_str != null&&!m_img_uri_str.isEmpty()) {
@@ -79,14 +92,14 @@ public class GetAdsLocation extends AppCompatActivity {
     }
 
     private void postTheAd() {
-
-        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), "HAHA6");
-        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "A tabla for rent");
-        RequestBody category = RequestBody.create(MediaType.parse("text/plain"), "15");
+//        Log.e("All Fields",sd_string+", "+cond_string+", "+ro_string+", "+ ra_string+", "+desc_string+", "+tite_string+", "+man_string+", "+quan_string+", "+main_cat_id+", "+sub_cat_1_id+", "+sub_cat_2_id);
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ""+tite_string);
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ""+desc_string);
+        RequestBody category = RequestBody.create(MediaType.parse("text/plain"), ""+main_cat_id);
         RequestBody availability = RequestBody.create(MediaType.parse("text/plain"), "yes");
-        RequestBody condition = RequestBody.create(MediaType.parse("text/plain"), "new");
-        RequestBody quantity = RequestBody.create(MediaType.parse("text/plain"), "1");
-        RequestBody rental_option = RequestBody.create(MediaType.parse("text/plain"), "Daily");
+        RequestBody condition = RequestBody.create(MediaType.parse("text/plain"), ""+cond_string);
+        RequestBody quantity = RequestBody.create(MediaType.parse("text/plain"), ""+quan_string);
+        RequestBody rental_option = RequestBody.create(MediaType.parse("text/plain"), ""+ro_string);
         RequestBody locality = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
         RequestBody city = RequestBody.create(MediaType.parse("text/plain"), "Delhi");
         RequestBody pincode = RequestBody.create(MediaType.parse("text/plain"), "110075");
