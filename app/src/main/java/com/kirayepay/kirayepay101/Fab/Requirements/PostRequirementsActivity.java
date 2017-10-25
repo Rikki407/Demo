@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -69,7 +68,6 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
 
         for (int i = 0; i < CategoryHierarchy.getSubcategories().get(0).size(); i++) {
             main_categories.add(CategoryHierarchy.getSubcategories().get(0).get(i).getCategory_name());
-            Log.e("main_categoriesxxx", main_categories.get(i));
         }
         main_adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, main_categories);
         category_text.setThreshold(0);
@@ -102,7 +100,6 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
         category_text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("position_cat", "" + CategoryHierarchy.getSubcategories().get(0).get(position).getCategory_name());
                 if (main_cat_id != CategoryHierarchy.getSubcategories().get(0).get(position).getCategory_id()) {
                     sub_1_categories.clear();
                     subcat_2_card.setVisibility(View.GONE);
@@ -229,8 +226,6 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
     private void postThisRequirement() {
 
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Log.e("ghi",user_id+" "+title.getText().toString()+" "+main_cat_id+" "+requirement.getText().toString()+" "+from.getText().toString()+" "+till.getText().toString());
-
         String sub_cat = (subcat1_text.getText().toString().isEmpty())? null:""+sub_cat_1_id;
         String sub_cat2 = (subcat2_text.getText().toString().isEmpty())? null:""+sub_cat_2_id;
 
@@ -247,7 +242,6 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
                 Toast.makeText(PostRequirementsActivity.this, "Can Not Post Requirement", Toast.LENGTH_LONG).show();
-                Log.e("not_post_req", "" + t.getMessage());
             }
         });
     }
@@ -260,12 +254,10 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
         int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog mDatePicker = new DatePickerDialog(PostRequirementsActivity.this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                // TODO Auto-generated method stub
                 edit_text.setText("" + selectedyear + "-" + selectedmonth + "-" + selectedday);
 
                 if (edit_text.getId() == R.id.post_req_from) {
                     from_time = mcurrentDate.getTimeInMillis();
-                    Log.e("fromdate1 ", "" + mcurrentDate.getTimeInMillis());
                 }
                 else{
                     till_time = mcurrentDate.getTimeInMillis();

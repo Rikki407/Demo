@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,6 @@ import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
 import com.kirayepay.kirayepay101.Network.Responses.EmailRegisterResponse;
 import com.kirayepay.kirayepay101.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,8 +77,6 @@ public class EmailSignUpFragment extends Fragment {
     }
 
     private void emailLogin(final String name, String password, String phone, final String email, String password_confirmation) {
-        Log.e("EmailResponse", name + " " + password + " " + phone + " " + email + " " + password_confirmation);
-
         ApiInterface apiInterface = ApiClient.getApiInterface();
         Call<EmailRegisterResponse> emailRegisterCall = apiInterface.userEmailRegister(name, password, phone, email, password_confirmation);
         emailRegisterCall.enqueue(new Callback<EmailRegisterResponse>() {
@@ -96,17 +90,13 @@ public class EmailSignUpFragment extends Fragment {
                     if (response.body().getError().getPassword() != null)
                         Toast.makeText(getActivity(), response.body().getError().getPassword().get(0), Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                     storeInfoInSharedPreference(email, "" + response.body().getId(), name, Acquire.EMAIL_AUTH);
-                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<EmailRegisterResponse> call, Throwable t) {
-                Log.e("EmailResponse", "Error " + t.getMessage() + Arrays.toString(t.getStackTrace()));
             }
         });
     }
@@ -118,6 +108,9 @@ public class EmailSignUpFragment extends Fragment {
         editor.putString(Acquire.USER_NAME, user_name);
         editor.putInt(Acquire.USER_AUTH_METHOD, Auth_Method);
         editor.apply();
-
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

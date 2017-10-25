@@ -7,10 +7,11 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -25,6 +26,10 @@ import com.kirayepay.kirayepay101.Network.ApiInterface;
 import com.kirayepay.kirayepay101.Network.Responses.SocialLoginResponse;
 import com.kirayepay.kirayepay101.R;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,20 +51,10 @@ public class FacebookAuth extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.auth_facebook,container,false);
-//        callingKey = getArguments().getString(MyConstants.CALLING_KEY);
         mContext = getActivity();
         mCallbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) v.findViewById(R.id.fb_signin_button);
-        //if using a fragment
         loginButton.setFragment(this);
-
-        /*
-            changing facebook login  button attributes below
-         */
-//        ////////////////////////////////////////////////
-//        loginButton.setText("Sign in");
-//        loginButton.setBackgroundResource(R.drawable.bottom_nav_home);
-//        ////////////////////////////////////////////////
 
         float fbIconScale = 1.45F;
         Drawable drawable = getActivity().getResources().getDrawable(
@@ -78,24 +73,22 @@ public class FacebookAuth extends Fragment
                         R.dimen.fb_margin_override_lr),
                 loginButton.getResources().getDimensionPixelSize(
                         R.dimen.fb_margin_override_bottom));
+
+        loginButton.setReadPermissions(Collections.singletonList("email"));
+
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(final LoginResult loginResult) {
-                Log.e("FB_user_id",""+loginResult.getAccessToken().getUserId());
                 GraphRequest graphRequest=GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject me, GraphResponse response) {
-                                if (response.getError() != null) {
-                                    // handle error
-                                    Log.e("Error","!!!!");
-                                } else {
-                                    Log.e("user_detais",""+me.optString("email")+""+me.optString("name"));
+                                if (response.getError() == null) {
                                     loginWithCredentials(me.optString("email"),loginResult.getAccessToken().getUserId(),me.optString("name"));
                                 }
                             }
                         });
                 Bundle bundle=new Bundle();
-                bundle.putString("fields","email,name");
+                bundle.putString("fields","name, email");
                 graphRequest.setParameters(bundle);
                 graphRequest.executeAsync();
 
@@ -103,14 +96,10 @@ public class FacebookAuth extends Fragment
 
             @Override
             public void onCancel() {
-                Log.e("FB", "facebook:onCancel");
-                // ...
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.e("FB", "facebook:onError", error);
-                // ...
             }
         });
         return v;
@@ -126,20 +115,19 @@ public class FacebookAuth extends Fragment
 
     private void loginWithCredentials(final String email, final String id , final String name)
     {
+        Toast.makeText(mContext,"please wait ... ",Toast.LENGTH_LONG).show();
         ApiInterface apiInterface = ApiClient.getApiInterface();
         Call<SocialLoginResponse> loginCall = apiInterface.userSocialLogin(name,email,id,"facebook");
         loginCall.enqueue(new Callback<SocialLoginResponse>() {
             @Override
             public void onResponse(Call<SocialLoginResponse> call, Response<SocialLoginResponse> response) {
-                Log.e("FacebookResponse","Logged In");
-                Intent intent = new Intent(getActivity(), MainActivity.class);
                 storeInfoInSharedPreference(email,id,name,Acquire.FACEBOOK_AUTH);
-                startActivity(intent);
+
             }
 
             @Override
             public void onFailure(Call<SocialLoginResponse> call, Throwable t) {
-                Log.e("FacebookResponse","Error "+t.getCause());
+                Toast.makeText(mContext,"Connection Error !!!",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -150,6 +138,9 @@ public class FacebookAuth extends Fragment
         editor.putString(Acquire.USER_NAME,user_name);
         editor.putInt(Acquire.USER_AUTH_METHOD,Auth_Method);
         editor.apply();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
     }
 }

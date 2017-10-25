@@ -5,17 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.Network.ApiClient;
@@ -86,7 +81,6 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
             public void onResponse(Call<ArrayList<RequirementContainments>> call, Response<ArrayList<RequirementContainments>> response) {
                 if(response.isSuccessful()) {
                     mostViewedAds.clear();
-                    Log.e("req_suc",""+response.body().get(0).getCategory());
                     mostViewedAds.addAll(response.body());
                     requirementsAdapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
@@ -94,7 +88,6 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
             }
             @Override
             public void onFailure(Call<ArrayList<RequirementContainments>> call, Throwable t) {
-                Log.e("req_suc"," "+t.getCause()+t.getMessage());
                 if(mostViewedAds.size()==0) refresh_layout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(false);
 
@@ -108,7 +101,6 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
         {
             case R.id.refresh_layout :
                 swipeRefreshLayout.setRefreshing(true);
-                Toast.makeText(getActivity(),"kzjdbcakj",Toast.LENGTH_LONG).show();
                 fetchAllRequirements();
                 break;
         }

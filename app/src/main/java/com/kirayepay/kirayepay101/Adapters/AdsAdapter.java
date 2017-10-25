@@ -3,7 +3,6 @@ package com.kirayepay.kirayepay101.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -58,7 +57,6 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder>
         }
     }
 
-
     @Override
     public AdsViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -93,29 +91,17 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.AdsViewHolder>
         }
         else
         {
-            double viewHeight = displayMetrics.heightPixels / 3;
-            double viewWidth = displayMetrics.widthPixels / 2.2;
-//            holder.cardView.getLayoutParams().height = (int) viewHeight;
-//            holder.cardView.getLayoutParams().width = (int) viewWidth;
             holder.ad_title.setText(ads_contenments.getAds_title());
             if(holder.ad_rental_price!=null) holder.ad_rental_price.setText((ads_contenments.getRental_amount()==0)?"":"₹ "+ads_contenments.getRental_amount());
             if(holder.ad_rental_option!=null) holder.ad_rental_option.setText((ads_contenments.getRental_option().equals("0"))?"":"  /- "+ads_contenments.getRental_option());
         }
 
 
-        /*
-          giving values to the views
-         */
 
         holder.ad_id = ads_contenments.getAds_id();
         holder.cat_id = ads_contenments.getCategory_id();
 
-        /*
-          giving a fade effect to title text exceeding more than the size of textview itself
-         */
-
-
-        if(ads_contenments.getImage()!=null&&!ads_contenments.getImage().isEmpty()) // checking for null exceptions
+        if(ads_contenments.getImage()!=null&&!ads_contenments.getImage().isEmpty())
         {
             Picasso.with(mContext).load(ads_contenments.getImage()).into(holder.ad_image);
         }

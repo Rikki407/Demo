@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kirayepay.kirayepay101.Details.RequirementsDetailsActivity;
-import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.Network.Responses.RequirementContainments;
 import com.kirayepay.kirayepay101.R;
 
@@ -26,11 +25,7 @@ import java.util.ArrayList;
 
 public class RequirementsAdapter extends RecyclerView.Adapter<RequirementsAdapter.RequirementsViewHolder> {
 
-//    public static final int SPAN_COUNT_ONE = 1;
-//    public static final int SPAN_COUNT_THREE = 2;
-//
-//    private static final int VIEW_TYPE_GRID = 1;
-//    private static final int VIEW_TYPE_LIST = 2;
+
 
     private Context mContext;
     private ArrayList<RequirementContainments> requirementsList;

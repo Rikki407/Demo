@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,13 +37,11 @@ public class PhotosPagerAdapter extends PagerAdapter {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         this.activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.view_pager_image);
-        Log.e("show_images", " " + other_images.get(position));
         Picasso.with(activity).load(other_images.get(position)).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
                 if (position == 0) {
                     double viewWidth = displayMetrics.widthPixels;
-                    Log.e("mah_width", "" + viewWidth);
                     collapsingToolbarLayout.getLayoutParams().height = (int) viewWidth;
                 }
             }

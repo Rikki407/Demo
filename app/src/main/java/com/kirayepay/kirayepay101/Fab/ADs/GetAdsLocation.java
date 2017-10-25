@@ -9,14 +9,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kirayepay.kirayepay101.Authentication.SigninActivity;
 import com.kirayepay.kirayepay101.MainActivity;
 import com.kirayepay.kirayepay101.Network.ApiClient;
 import com.kirayepay.kirayepay101.Network.ApiInterface;
@@ -53,7 +51,6 @@ public class GetAdsLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.get_location);
-        Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
         Locality = (EditText)findViewById(R.id.post_ads_locality);
         City = (EditText)findViewById(R.id.post_ads_city);
         State = (EditText)findViewById(R.id.post_ads_state);
@@ -121,7 +118,6 @@ public class GetAdsLocation extends AppCompatActivity {
     }
 
     private void postTheAd() {
-//        Log.e("All Fields",sd_string+", "+cond_string+", "+ro_string+", "+ ra_string+", "+desc_string+", "+tite_string+", "+man_string+", "+quan_string+", "+main_cat_id+", "+sub_cat_1_id+", "+sub_cat_2_id);
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ""+tite_string);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ""+desc_string);
         RequestBody category = RequestBody.create(MediaType.parse("text/plain"), ""+main_cat_id);
@@ -151,8 +147,6 @@ public class GetAdsLocation extends AppCompatActivity {
 
         if(!Acquire.CALL_WITH_IMAGES)
         {
-            Log.e("itenom", "heretoo"+Acquire.CALL_WITH_IMAGES);
-
             if(sub_cat_1_id==-1) sub_cat1=null;
 
             if(sub_cat_2_id==-1) sub_cat2=null;
@@ -162,7 +156,6 @@ public class GetAdsLocation extends AppCompatActivity {
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone);
         }
         else {
-            Log.e("itenom", "heretx"+Acquire.CALL_WITH_IMAGES);
 
             postAdCall =apiInterface.postAdsWithImage(title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone, main_image, filename,
@@ -173,7 +166,6 @@ public class GetAdsLocation extends AppCompatActivity {
             @Override
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
                 if (response.isSuccessful()) {
-                    Log.e("posted", "kmlkm" + response.body().getMessage());
                     Toast.makeText(mContext,"Ad Posted",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(mContext,MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -183,7 +175,6 @@ public class GetAdsLocation extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
-                Log.e("cannot_post", "kkk" + t.getCause() + t.getMessage());
                 Toast.makeText(mContext,"Can't Post Ad",Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
@@ -194,7 +185,6 @@ public class GetAdsLocation extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // In order to not be too narrow, set the window size based on the screen resolution:
         final int screen_width = getResources().getDisplayMetrics().widthPixels;
         final int screen_height = getResources().getDisplayMetrics().heightPixels;
         final int new_window_width = screen_width * 100 / 100;
@@ -207,14 +197,11 @@ public class GetAdsLocation extends AppCompatActivity {
 
     private void createFile(String uri_string) {
         Uri uri = Uri.parse(uri_string);
-        Log.e("kbkbnk", "" + uri);
         String filePath = getRealPathFromURIPath(uri, GetAdsLocation.this);
         File file = new File(filePath);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
         filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
-
-        Log.e("foxy", " "+main_image+" "+other_image_1+" "+other_image_2+" "+other_image_3+" "+other_image_4);
 
         if (uri_string.equals(m_img_uri_str))
             main_image = MultipartBody.Part.createFormData("image", file.getName(), requestBody);

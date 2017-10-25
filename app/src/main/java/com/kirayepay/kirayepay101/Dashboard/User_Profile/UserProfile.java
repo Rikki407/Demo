@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,8 +71,11 @@ public class UserProfile extends AppCompatActivity
 
     private void updateUserProfile()
     {
-        int pin_code = Integer.parseInt(up_pincode.getText().toString());
-
+        int pin_code = 0;
+        if(!up_pincode.getText().toString().isEmpty())
+        {
+            pin_code = Integer.parseInt(up_pincode.getText().toString());
+        }
         ApiInterface apiInterface = ApiClient.getApiInterface();
         Call<PostContainments> updateProfileCall = apiInterface.userProfileUpdate(user_id,up_name.getText().toString(),
                 up_phone.getText().toString(),up_locality.getText().toString(),up_city.getText().toString(),"India",
@@ -83,7 +85,6 @@ public class UserProfile extends AppCompatActivity
             @Override
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
                 if(response.isSuccessful()) {
-                    Log.e("update_profile",response.body().getMessage());
                    Toast.makeText(mContext,"Profile Updated",Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE).edit();
                     editor.putString(Acquire.USER_NAME,up_name.getText().toString());
@@ -109,10 +110,9 @@ public class UserProfile extends AppCompatActivity
         user_info_call.enqueue(new Callback<ProfileContainment>() {
             @Override
             public void onResponse(Call<ProfileContainment> call, Response<ProfileContainment> response) {
-                Log.e("seller_profile",""+response.body().getSeller().get(0).getName());
                 SellerContainments seller = response.body().getSeller().get(0);
                 up_name.setText(""+seller.getName());
-                up_phone.setText(""+seller.getPhone());
+                if(seller.getPincode()!=0) up_phone.setText(""+seller.getPhone());
                 if(seller.getCity()!=null)up_city.setText(""+seller.getCity());
                 if(seller.getDistrict()!=null)up_district.setText(""+seller.getDistrict());
                 if(seller.getLocality()!=null)up_locality.setText(""+seller.getLocality());
@@ -120,7 +120,6 @@ public class UserProfile extends AppCompatActivity
                 if(seller.getPincode()!=0)up_pincode.setText(""+seller.getPincode());
                 storeInfoInSharedPreference(""+seller.getPhone(),""+seller.getCity(),
                         ""+seller.getDistrict(),""+seller.getLocality(),""+seller.getState(),""+seller.getPincode());
-
             }
 
             @Override

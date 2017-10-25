@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName;
 public class PostContainments
 {
     @SerializedName("message")
-    String message;                 // "successful" for successful POST request
+    String message;
     @SerializedName("status")
-    String status;                  // "success" for successful POST request
+    String status;
 
     public String getMessage() {
         return message;

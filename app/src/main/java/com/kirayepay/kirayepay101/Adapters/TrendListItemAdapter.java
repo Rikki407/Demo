@@ -2,7 +2,6 @@ package com.kirayepay.kirayepay101.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,7 +50,7 @@ public class TrendListItemAdapter extends RecyclerView.Adapter<TrendListItemAdap
         if(holder.ad_price!=null) holder.ad_price.setText((adsContainments.getRental_amount()==0)?"":"₹ "+adsContainments.getRental_amount());
         if(holder.ad_rental_option!=null) holder.ad_rental_option.setText((adsContainments.getRental_option().equals("0"))?"":"  /- "+adsContainments.getRental_option());
 
-        if(adsContainments.getImage()!=null&&!adsContainments.getImage().isEmpty()) // checking for null exceptions
+        if(adsContainments.getImage()!=null&&!adsContainments.getImage().isEmpty())
         {
             Picasso.with(mContext).load(adsContainments.getImage()).into(holder.ad_image);
         }

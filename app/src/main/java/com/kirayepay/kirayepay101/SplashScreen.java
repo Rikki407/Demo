@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.BounceInterpolator;
@@ -34,7 +33,7 @@ public class SplashScreen extends AppCompatActivity
         setContentView(R.layout.splash_screen);
         mContext = this;
         SharedPreferences preferences = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
-        if(preferences.getInt(Acquire.USER_AUTH_METHOD,-1)==-1)                     //checking if user has already signed in or not
+        if(preferences.getInt(Acquire.USER_AUTH_METHOD,-1)==-1)
         {
             open_auth_activity = true;
         }
@@ -43,10 +42,9 @@ public class SplashScreen extends AppCompatActivity
             public void run() {
                 try {
                     super.run();
-                    sleep(3000);  //Delay of 4.0 seconds
+                    sleep(3000);
                 } catch (Exception e) {
                 } finally {
-                    // opening main activity if user has already signed in or SigninActivity in the other case
                     Intent i = (open_auth_activity)?new Intent(mContext, SigninActivity.class):new Intent(mContext,MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
@@ -71,23 +69,17 @@ public class SplashScreen extends AppCompatActivity
 
             @Override
             public void onAnimationStart(Animation animation) {
-                Log.e("yo", "Starting button dropdown animation");
-
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Log.e("yo", "Ending button dropdown animation. Clearing animation and setting layout");
             }
         });
         logo_image.startAnimation(transAnim);
-
     }
 
 

@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 import com.kirayepay.kirayepay101.RikkiClasses.CategoryHierarchy;
@@ -46,16 +45,16 @@ public class AdsByCategoryFragment extends Fragment {
         categories_names = new ArrayList<>();
         adsListFragments = new ArrayList<>();
 
-        fetchCategoriesNames();             // fetching categpries title for view pager
+        fetchCategoriesNames();
 
-        adsListFragments = buildFragments();   // fetching the fragments for the viewpager
+        adsListFragments = buildFragments();
 
         abc_pagerAdapter = new ABC_PagerAdapter(getActivity(), getFragmentManager(), adsListFragments, categories_names);
         tabLayout = (TabLayout) v.findViewById(R.id.adsbycat_tablayout);
         viewPager = (ViewPager) v.findViewById(R.id.adsbycat_viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(abc_pagerAdapter);
-        viewPager.setCurrentItem(selected_cat_pos);   //displaying the category ads selected by the user......changing the viewpager selected fragment
+        viewPager.setCurrentItem(selected_cat_pos);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -65,9 +64,7 @@ public class AdsByCategoryFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                /*
-                    For filter updating
-                 */
+
                 Acquire.PRICE_SEEKBAR_CURR = Integer.MAX_VALUE;
                 Acquire.SECURITY_SEEKBAR_CURR = Integer.MAX_VALUE;
                 selected_cat_pos = position;

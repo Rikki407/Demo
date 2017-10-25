@@ -30,10 +30,6 @@ public class SignUpActivity extends AppCompatActivity
             }
         });
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        GoogleAuth googleAuth = new GoogleAuth();
-//        ft.replace(R.id.google_signup_button_container,googleAuth);
-//        FacebookAuth facebookAuth = new FacebookAuth();
-//        ft.replace(R.id.fb_signup_button_container,facebookAuth);
         EmailSignUpFragment emailSignUpFragment = new EmailSignUpFragment();
         ft.replace(R.id.email_signup_container, emailSignUpFragment).commit();
     }

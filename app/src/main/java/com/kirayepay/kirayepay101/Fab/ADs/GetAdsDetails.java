@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -53,8 +52,6 @@ public class GetAdsDetails extends AppCompatActivity {
         other_img_uri_3 = intent.getStringExtra("other_img_uri_3");
         other_img_uri_4 = intent.getStringExtra("other_img_uri_4");
 
-
-        Log.e("show_uri", " - " + main_img_uri + "\n" + other_img_uri_1 + "\n" + other_img_uri_2 + "\n" + other_img_uri_3 + "\n" + other_img_uri_4);
         goto_ads_location = (TextView) findViewById(R.id.loc_activity);
         goto_ads_location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +74,6 @@ public class GetAdsDetails extends AppCompatActivity {
 
                     if(subcat2_text.getText().toString().isEmpty()) sub_cat_2_id = -1;
 
-                    Log.e("show_uri", "" + main_img_uri);
                     intent2.putExtra("main_uri", main_img_uri);
                     intent2.putExtra("other_uri_1", other_img_uri_1);
                     intent2.putExtra("other_uri_2", other_img_uri_2);
@@ -137,7 +133,6 @@ public class GetAdsDetails extends AppCompatActivity {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View paramView, MotionEvent paramMotionEvent) {
-                // TODO Auto-generated method stub
                 View view = getWindow().getCurrentFocus();
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -168,7 +163,6 @@ public class GetAdsDetails extends AppCompatActivity {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View paramView, MotionEvent paramMotionEvent) {
-                // TODO Auto-generated method stub
                 View view = getWindow().getCurrentFocus();
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -195,7 +189,6 @@ public class GetAdsDetails extends AppCompatActivity {
         if (CategoryHierarchy.getSubcategories().get(0) != null)
             for (int i = 0; i < CategoryHierarchy.getSubcategories().get(0).size(); i++) {
                 main_categories.add(CategoryHierarchy.getSubcategories().get(0).get(i).getCategory_name());
-                Log.e("main_categoriesxxx", main_categories.get(i));
             }
 
         main_adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, main_categories);
@@ -229,7 +222,6 @@ public class GetAdsDetails extends AppCompatActivity {
         category_text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("position_cat", "" + CategoryHierarchy.getSubcategories().get(0).get(position).getCategory_name());
                 if (main_cat_id != CategoryHierarchy.getSubcategories().get(0).get(position).getCategory_id()) {
                     sub_1_categories.clear();
                     subcat_2_card.setVisibility(View.GONE);

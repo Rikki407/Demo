@@ -95,7 +95,6 @@ public class RequirementsDetailsActivity extends AppCompatActivity implements Vi
     @Override
     protected void onStart() {
         super.onStart();
-        // In order to not be too narrow, set the window size based on the screen resolution:
         final int screen_width = getResources().getDisplayMetrics().widthPixels;
         final int screen_height = getResources().getDisplayMetrics().heightPixels;
         final int new_window_width = screen_width * 100 / 100;

@@ -1,7 +1,5 @@
 package com.kirayepay.kirayepay101.AdsOfCategory;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -10,13 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.Adapters.AdsAdapter;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
@@ -66,7 +62,7 @@ public class AdsListFragment extends Fragment {
         swipeRefreshLayout.setRefreshing(true);
 
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
-        swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
+        swipeRefreshLayout.setColorSchemeResources(R.color.kp_red, R.color.kp_blue);
         rental_options.put(R.id.ro_daily, true);
         rental_options.put(R.id.ro_weekly, true);
         rental_options.put(R.id.ro_monthly, true);
@@ -84,12 +80,10 @@ public class AdsListFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(adsListOfCategory!=null) changeAccToFilter();
+                if (adsListOfCategory != null) changeAccToFilter();
             }
         });
-        changeAccToFilter();
-
-
+        fetchAdsForCategory();
 
         return v;
     }
@@ -109,53 +103,45 @@ public class AdsListFragment extends Fragment {
                         if (max_deposit_price <= curr_deposit) max_deposit_price = curr_deposit;
                         adsListOfCategory.add(body.get(i));
                     }
-
                     curr_deposit_price = max_deposit_price;
                     curr_rent_price = max_rent_price;
+
+                    Acquire.PRICE_SEEKBAR_MAX = max_rent_price;
+                    Acquire.SECURITY_SEEKBAR_MAX = max_deposit_price;
+
                     if (view_pager_position == Acquire.INIT_ABC_PAGER_POS && !already_called) {
-                        updateInitFilterValues();
-                        Log.e("vhgv", "gfgjh");
                         already_called = true;
+                        updateInitFilterValues();
                     }
                     adsAdapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
-
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<AdsContainments>> call, Throwable t) {
-                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     public void changeAccToFilter() {
-        Log.e("rikki  ", " rent curr" + Acquire.PRICE_SEEKBAR_CURR + " deposit curr " + Acquire.SECURITY_SEEKBAR_CURR);
         adsListOfCategory.clear();
         no_results_found.setVisibility(View.GONE);
-        if(body==null)
-        {
+        if (body == null) {
             fetchAdsForCategory();
         }
-        else
-        {
+        else {
             for (int i = 0; i < body.size(); i++) {
 
-                if (body.get(i).getRental_amount() <= Acquire.PRICE_SEEKBAR_CURR && body.get(i).getSecurity_deposit() <= Acquire.SECURITY_SEEKBAR_CURR)
-                {
-                    Log.e("rikki  ", ""+body.get(i).getRental_option()+" "+ body.get(i).getRental_amount() + " deposit curr " + body.get(i).getRental_amount());
+                if (body.get(i).getRental_amount() <= Acquire.PRICE_SEEKBAR_CURR && body.get(i).getSecurity_deposit() <= Acquire.SECURITY_SEEKBAR_CURR) {
 
-
-                    if (rental_options.get(R.id.ro_daily) && body.get(i).getRental_option().equals("Daily"))
-                    {
+                    if (rental_options.get(R.id.ro_daily) && body.get(i).getRental_option().equals("Daily")) {
                         if (Acquire.CONTDITITON.equals("Both") || Acquire.CONTDITITON.equals("0"))
                             adsListOfCategory.add(body.get(i));
                         else if (Acquire.CONTDITITON.equals(body.get(i).getCondition()))
                             adsListOfCategory.add(body.get(i));
-                    }
-                    else if (rental_options.get(R.id.ro_weekly) && body.get(i).getRental_option().equals("Weekly"))
+                    } else if (rental_options.get(R.id.ro_weekly) && body.get(i).getRental_option().equals("Weekly"))
                         adsListOfCategory.add(body.get(i));
                     else if (rental_options.get(R.id.ro_monthly) && body.get(i).getRental_option().equals("Monthly"))
                         adsListOfCategory.add(body.get(i));
@@ -171,7 +157,7 @@ public class AdsListFragment extends Fragment {
         curr_deposit_price = Acquire.SECURITY_SEEKBAR_CURR;
         adsAdapter.notifyDataSetChanged();
 
-        if(adsListOfCategory.size()==0) {
+        if (adsListOfCategory.size() == 0) {
             no_results_found.setVisibility(View.GONE);
         }
 
@@ -179,9 +165,6 @@ public class AdsListFragment extends Fragment {
 
 
     public void updateInitFilterValues() {
-         /*
-                    For filter updating
-         */
         Acquire.CONTDITITON = condition;
         Acquire.RENTAL_OPTIONS = rental_options;
         Set<Map.Entry<Integer, Boolean>> entries = Acquire.RENTAL_OPTIONS.entrySet();
@@ -197,10 +180,10 @@ public class AdsListFragment extends Fragment {
                 }
             }
         }
-        int radio_bttn_id = R.id.both_button;;
+        int radio_bttn_id = R.id.both_button;
+        ;
 
-        if(condition!=null)
-        {
+        if (condition != null) {
             switch (condition) {
                 case "Used":
                     radio_bttn_id = R.id.used_button;
@@ -220,10 +203,6 @@ public class AdsListFragment extends Fragment {
         Acquire.SECURITY_SEEKBAR_MAX = max_deposit_price;
         Acquire.SECURITY_SEEKBAR_CURR = curr_deposit_price;
         Acquire.PRICE_SEEKBAR_CURR = curr_rent_price;
-        Log.e("vhgv", ""+max_rent_price+" , "+ max_rent_price);
-
-
-
 
     }
 

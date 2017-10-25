@@ -7,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.Adapters.TrendingAdapter;
 import com.kirayepay.kirayepay101.Network.ApiClient;
@@ -78,7 +76,6 @@ public class TrendingFragment extends Fragment
             }
             @Override
             public void onFailure(Call<TrendingContainments> call, Throwable t) {
-                Log.e("trendingfragment", t.getMessage());
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -89,7 +86,6 @@ public class TrendingFragment extends Fragment
 
         trendingAds.clear();
         trendingAds.addAll(ads);
-        Log.e("show_size",""+ads.size());
         trendingAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
 

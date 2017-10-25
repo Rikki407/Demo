@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.kirayepay.kirayepay101.Search.SearchPagerFragments.SearchAdsFragment;
-import com.kirayepay.kirayepay101.Search.SearchPagerFragments.SearchCategoryFragments;
-import com.kirayepay.kirayepay101.Search.SearchPagerFragments.SearchRequirementsFragment;
 
 import java.util.ArrayList;
 

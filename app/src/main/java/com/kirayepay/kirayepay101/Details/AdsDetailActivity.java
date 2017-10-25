@@ -12,7 +12,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -132,7 +131,6 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         phone = (TextView) findViewById(R.id.ads_detail_phone);
         email = (TextView) findViewById(R.id.ads_detail_email);
         address = (TextView) findViewById(R.id.ads_detail_address);
-//        adImage = (ImageView) findViewById(R.id.ads_detail_images);
         callImage = (ImageView) findViewById(R.id.call_seller);
         mailImage = (ImageView) findViewById(R.id.mail_seller);
         callImage.setOnClickListener(this);
@@ -157,7 +155,6 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
 
     void collapseExpandTextView() {
         if (seller_info.getVisibility() == View.GONE) {
-            // it's collapsed - expand it
             if(!already_expanded){
                 sendSurvey();
                 already_expanded = true;
@@ -166,7 +163,6 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
             seller_info.setVisibility(View.VISIBLE);
             expand_circle.setImageResource(R.drawable.blue_remove_circle);
         } else {
-            // it's expanded - collapse it
             show_info_text.setText("Show Seller's Info");
             seller_info.setVisibility(View.GONE);
             expand_circle.setImageResource(R.drawable.blue_expand_circle);
@@ -183,12 +179,10 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         sendSurveyCall.enqueue(new Callback<PostContainments>() {
             @Override
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
-                Log.e("survey_message",""+Acquire.IP_ADDRESS+" "+response.body().getMessage());
             }
 
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
-                Log.e("survey_message",""+Acquire.IP_ADDRESS+" "+t.getMessage());
             }
         });
     }
@@ -202,13 +196,11 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
             public void onResponse(Call<AdsResponse> call, Response<AdsResponse> response) {
                 if (response.isSuccessful()) {
 
-                    Log.e("ad_id", "" + ad_id);
                     setDetailsFields(response.body());
                 }
             }
             @Override
             public void onFailure(Call<AdsResponse> call, Throwable t) {
-                Log.e("otherImage", "cc" + t.getMessage());
             }
         });
     }
@@ -226,7 +218,6 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         collapsing_toolbar.setCollapsedTitleTextColor(Color.parseColor("#3d3c3c"));
         adsTitle.setText("" + body.getAds().get(0).getAds_title());
 
-        Log.e("ad_id", "" + ad_id);
 
         if (!(body.getAds().get(0).getRental_amount() == 0))
             rentalAmount.setText("₹" + body.getAds().get(0).getRental_amount() + "/-");

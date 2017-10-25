@@ -28,7 +28,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter
             case 1:
                 return "Most Viewed";
             case 2:
-                return "Requirements";
+                return "Required";
         }
         return null;
     }

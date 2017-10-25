@@ -1,6 +1,5 @@
 package com.kirayepay.kirayepay101;
 
-import android.*;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -22,7 +20,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +33,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.kirayepay.kirayepay101.Authentication.SigninActivity;
 import com.kirayepay.kirayepay101.Dashboard.ContactUs;
 import com.kirayepay.kirayepay101.Dashboard.Disclaimer;
@@ -75,11 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int Auth_Method;
     private DrawerLayout mDrawerLayout;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private TextView user_name_txtview,user_ads,user_requirements,user_profile,contact_us,privacy_policy,terms_and_cond,disclaimer,log_out_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         navigationFragment = new NavigationFragment();
 
         setContentView(R.layout.activity_main);
@@ -115,15 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         user_id = prefs.getString(Acquire.USER_ID,"No Id");
         Auth_Method = prefs.getInt(Acquire.USER_AUTH_METHOD,-1);
         user_name_txtview.setText(""+user_name);
-        Log.e("user_details"," "+user_id+" "+user_email+" "+user_name+" "+Auth_Method);
-        Toast.makeText(this," "+user_id+" "+user_email+" "+user_name+" "+Auth_Method,Toast.LENGTH_LONG).show();
         subcategories = new HashMap<>();
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
         searchView.setVoiceSearch(true);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //Do some magic
                 return false;
             }
 
@@ -280,7 +277,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         MenuItem item = menu.findItem(R.id.search);
         searchView.setMenuItem(item);

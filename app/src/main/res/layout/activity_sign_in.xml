@@ -8,8 +8,8 @@
     android:gravity="center"
     tools:context="com.kirayepay.kirayepay101.Authentication.SigninActivity">
     <ImageView
-        android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:background="@drawable/ic_kp_title"
         />

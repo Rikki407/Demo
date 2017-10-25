@@ -3,7 +3,6 @@ package com.kirayepay.kirayepay101;
 import android.app.Application;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.Log;
 
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
 
@@ -25,7 +24,6 @@ public class MainApplication extends Application
         StrictMode.setVmPolicy(builder.build());
         String ip = getLocalIpAddress();
         Acquire.IP_ADDRESS = ip;
-        Log.e("dummy_address",""+ip);
     }
 
     public String getLocalIpAddress(){
@@ -41,7 +39,7 @@ public class MainApplication extends Application
                 }
             }
         } catch (Exception ex) {
-            Log.e("IP Address", ex.toString());
+            return "12Er";
         }
         return null;
     }

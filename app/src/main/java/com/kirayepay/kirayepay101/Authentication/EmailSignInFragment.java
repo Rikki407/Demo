@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,16 +74,11 @@ public class EmailSignInFragment extends Fragment implements View.OnClickListene
         emailLoginCall.enqueue(new Callback<ArrayList<EmailLoginResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<EmailLoginResponse>> call, Response<ArrayList<EmailLoginResponse>> response) {
-
                     EmailLoginResponse loginResponse = response.body().get(0);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     storeInfoInSharedPreference(loginResponse.getEmail(), loginResponse.getUserid(), loginResponse.getName(), Acquire.EMAIL_AUTH);
-                    startActivity(intent);
             }
             @Override
             public void onFailure(Call<ArrayList<EmailLoginResponse>> call, Throwable t) {
-                Log.e("EmailResponse","Error "+t.getCause());
                 Toast.makeText(getActivity(),"Username or password incorrect",Toast.LENGTH_SHORT).show();
 
             }
@@ -98,6 +92,8 @@ public class EmailSignInFragment extends Fragment implements View.OnClickListene
         editor.putString(Acquire.USER_NAME,user_name);
         editor.putInt(Acquire.USER_AUTH_METHOD,Auth_Method);
         editor.apply();
-
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName;
 public class SocialLoginResponse
 {
     @SerializedName("message")
-    String message;                 // "User Registered." for successful POST request
+    String message;
     @SerializedName("user")
-    User user;                  // "success" for successful POST request
+    User user;
 
     public String getMessage() {
         return message;

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +88,6 @@ public class MostViewedFragment extends Fragment
             public void onFailure(Call<ArrayList<AdsContainments>> call, Throwable t) {
                 Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
-                Log.e("khvhgv","jvhgv");
-
             }
         });
     }

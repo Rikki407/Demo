@@ -12,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,9 +89,7 @@ public class NavigationFragment extends Fragment
     protected BroadcastReceiver ActivityDataReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(ACTION_INTENT.equals(intent.getAction())) {
-                Log.e("hello","some"+intent.getStringExtra("TEXT"));
-            }
+
         }
     };
 }

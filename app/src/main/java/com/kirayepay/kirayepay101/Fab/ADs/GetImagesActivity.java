@@ -17,7 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,13 +24,6 @@ import android.widget.Toast;
 
 import com.kirayepay.kirayepay101.R;
 import com.kirayepay.kirayepay101.RikkiClasses.Acquire;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * Created by rikki on 10/7/17.
@@ -169,7 +161,6 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void takeImageFromCamera(int request_code) {
-        Log.e("camera", "camera_start");
         if (checkPermissionForCamera(mContext, request_code)) {
             values.put(MediaStore.Images.Media.TITLE, "New Picture");
             values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
@@ -284,7 +275,6 @@ public class GetImagesActivity extends AppCompatActivity implements View.OnClick
 
                 case REQUEST_GALLERY_CODE_0:
                     main_img_uri = data.getData();
-                    Log.e("photo_uri ", "" + main_img_uri);
                     main_image.setImageURI(main_img_uri);
                     break;
                 case REQUEST_CAMERA_CODE_1:

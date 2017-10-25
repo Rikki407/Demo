@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,18 +102,10 @@ public class GoogleAuth extends Fragment implements View.OnClickListener, Google
     private void handleSignInResult(GoogleSignInResult result)
     {
         if (result.isSuccess()) {
-            // Signed in successfully
-            GoogleSignInAccount acct = result.getSignInAccount();  //got the user's account with primary details
+            GoogleSignInAccount acct = result.getSignInAccount();
             if (acct != null) {
-//                googleIdToken = acct.getIdToken();               //  the idtoken of user is  not the  userId
-                Log.e("username",""+acct.getDisplayName());
-                Log.e("user_Email",""+acct.getEmail());
-                Log.e("user_id",""+acct.getId());
                 loginWithCredentials(acct.getEmail(),acct.getId(),acct.getDisplayName());
             }
-
-        } else {
-            // Signed out
         }
     }
 
@@ -125,15 +116,13 @@ public class GoogleAuth extends Fragment implements View.OnClickListener, Google
         loginCall.enqueue(new Callback<SocialLoginResponse>() {
             @Override
             public void onResponse(Call<SocialLoginResponse> call, Response<SocialLoginResponse> response) {
-                Log.e("GoogleResponse","Logged In");
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+
                 storeInfoInSharedPreference(email,id,name,Acquire.GOOGLE_AUTH);
-                startActivity(intent);
+
             }
             @Override
             public void onFailure(Call<SocialLoginResponse> call, Throwable t) {
-                Log.e("GoogleResponse","Error "+t.getCause());
-
+                Toast.makeText(getActivity(),"Connection Error !!!",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -144,6 +133,9 @@ public class GoogleAuth extends Fragment implements View.OnClickListener, Google
         editor.putString(Acquire.USER_NAME,user_name);
         editor.putInt(Acquire.USER_AUTH_METHOD,Auth_Method);
         editor.apply();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
     }
 

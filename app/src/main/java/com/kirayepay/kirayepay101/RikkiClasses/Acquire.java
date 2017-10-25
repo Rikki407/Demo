@@ -41,11 +41,7 @@ public class Acquire {
     public static String IP_ADDRESS = "noaddress";
 
     public static HashMap<Integer,Boolean> RENTAL_OPTIONS = new HashMap<>();
-    /*
-        CONDITION = 100 means new condition
-        CONDITION = 200 means used condition
-        CONDITION = 300 means both condition
-     */
+
     public static String CONTDITITON = "Both";
 
     public static boolean CALL_WITH_IMAGES = false;

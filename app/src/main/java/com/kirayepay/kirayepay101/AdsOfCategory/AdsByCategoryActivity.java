@@ -9,7 +9,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -32,7 +31,7 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
     int category_id,parent_category_id;
     int rent_seek_progress,deposit_seek_progress;
     View bottomSheet;
-    public static SeekBar price_seekbar,security_seekbar;
+    SeekBar price_seekbar,security_seekbar;
     TextView price_textview,security_textview;
     TextView ro_daily,ro_weekly,ro_monthly,ro_occasional;
     RadioGroup conditions;
@@ -88,8 +87,6 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                // React to state change
-
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     WindowManager.LayoutParams windowManager = getWindow().getAttributes();
                     windowManager.dimAmount = 0.75f;
@@ -108,7 +105,6 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
 
                     rent_seek_progress = Acquire.PRICE_SEEKBAR_CURR;
                     deposit_seek_progress = Acquire.SECURITY_SEEKBAR_CURR;
-                    Log.e("maxlimit", "" +Acquire.PRICE_SEEKBAR_CURR+" , " +Acquire.SECURITY_SEEKBAR_CURR);
                     price_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -144,14 +140,11 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
 
                         }
                     });
-                } else {
-
                 }
             }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                // React to dragging events
-                Log.e("onSlide", "onSlide");
+
             }
         });
         behavior.setPeekHeight(0);
@@ -177,9 +170,6 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
             openBottomSheet();
         }
 
-         /*
-               for changing the list from list to grid view
-             */
         else if(item.getItemId()==R.id.list_change_view)
         {
             Acquire.IS_LISTVIEW = !Acquire.IS_LISTVIEW;
@@ -187,10 +177,10 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
                 if (AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager != null) {
                     if (AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager.getSpanCount() == 1) {
                         item.setIcon(R.drawable.list_view);
-                        AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager.setSpanCount(2); //span count 2 for grid view
+                        AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager.setSpanCount(2);
                     } else {
                         item.setIcon(R.drawable.grid_view);
-                        AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager.setSpanCount(1);  //span count 1 for list view
+                        AdsByCategoryFragment.adsListFragments.get(i).gridLayoutManager.setSpanCount(1);
                     }
                     AdsByCategoryFragment.adsListFragments.get(i).adsAdapter.notifyItemRangeChanged(0, AdsByCategoryFragment.adsListFragments.get(i).adsAdapter.getItemCount());
                 }
@@ -242,12 +232,10 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
     private void selectCondition(View v) {
         RadioButton rb = (RadioButton) v;
         Acquire.CONTDITITON = (String) rb.getText();
-        Log.e("nckjn",""+rb.getText());
     }
 
     private void applyFilterBehavior(View v) {
-//        ((GradientDrawable) v.getBackground()).setColor(Color.parseColor("#E92D39"));
-//        apply_filter.setTextColor(Color.parseColor("#FFFFFF"));
+
 
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         Acquire.PRICE_SEEKBAR_CURR = rent_seek_progress;
@@ -255,7 +243,7 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
         abc.adsListFragments.get(abc.selected_cat_pos).changeAccToFilter();
     }
 
-    @Override                               //for any touch event outside the bottomsheet
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -299,25 +287,5 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
         Acquire.RENTAL_OPTIONS.put(v.getId(),!Acquire.RENTAL_OPTIONS.get(v.getId()));
 
     }
-//        @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==R.id.list_change_view)
-//        {
-//            if (gridLayoutManager.getSpanCount() == 1) {
-//                    item.setIcon(R.drawable.list_view);
-//                    gridLayoutManager.setSpanCount(3);
-//                }
-//                else {
-//                    item.setIcon( R.drawable.grid_view);
-//                    gridLayoutManager.setSpanCount(1);
-//                }
-//                requirementsAdapter.notifyItemRangeChanged(0, requirementsAdapter.getItemCount());
-//
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 }
