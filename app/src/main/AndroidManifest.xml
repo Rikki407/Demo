@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kirayepay.kirayepay101">
+    package="com.kirayepay.KirayePay_Rikki">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,9 +12,9 @@
 
 
     <application
-        android:name="com.kirayepay.kirayepay101.MainApplication"
+        android:name="com.kirayepay.KirayePay_Rikki.MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/kp_square"
+        android:icon="@mipmap/kp_icons"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/kp_launcher"
         android:supportsRtl="true"
@@ -24,44 +24,44 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.kirayepay.kirayepay101.MainActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
         </activity>
         <activity
-            android:name="com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.AdsOfCategory.AdsByCategoryActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Details.AdsDetailActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Details.AdsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Fab.OnFabClickedActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Fab.OnFabClickedActivity"
             android:theme="@style/myTheme"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Fab.ADs.GetAdsDetails"
+            android:name="com.kirayepay.KirayePay_Rikki.Fab.ADs.GetAdsDetails"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Details.RequirementsDetailsActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Details.RequirementsDetailsActivity"
             android:theme="@style/myTheme"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Fab.Requirements.PostRequirementsActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Fab.Requirements.PostRequirementsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Authentication.SigninActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Authentication.SigninActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
@@ -73,13 +73,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kirayepay.kirayepay101.Authentication.SignUpActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Authentication.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
         </activity>
         <activity
-            android:name="com.kirayepay.kirayepay101.SplashScreen"
+            android:name="com.kirayepay.KirayePay_Rikki.SplashScreen"
             android:theme="@style/Theme.Transparent"
             android:screenOrientation="portrait"
             >
@@ -90,46 +90,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.User_Profile.UserProfile"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.User_Profile.UserProfile"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
 
         <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.User_Ads.UserAds"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.User_Ads.UserAds"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
-        <activity android:name="com.kirayepay.kirayepay101.Dashboard.User_Requirements.UserRequirements"
+        <activity android:name="com.kirayepay.KirayePay_Rikki.Dashboard.User_Requirements.UserRequirements"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.ContactUs"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"
-            />
-        <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.TermsAndCond"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.ContactUs"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.PrivacyPolicy"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.TermsAndCond"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Dashboard.Disclaimer"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.PrivacyPolicy"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Fab.ADs.GetAdsLocation"
+            android:name="com.kirayepay.KirayePay_Rikki.Dashboard.Disclaimer"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.kirayepay.KirayePay_Rikki.Fab.ADs.GetAdsLocation"
             android:theme="@style/myTheme"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.kirayepay.kirayepay101.Fab.ADs.GetImagesActivity"
+            android:name="com.kirayepay.KirayePay_Rikki.Fab.ADs.GetImagesActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />

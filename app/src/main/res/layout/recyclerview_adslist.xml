@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:clickable="true"
-    tools:context="com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity">
+    tools:context="com.kirayepay.KirayePay_Rikki.AdsOfCategory.AdsByCategoryActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

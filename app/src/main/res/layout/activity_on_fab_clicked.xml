@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kirayepay.kirayepay101.Fab.OnFabClickedActivity">
+    tools:context="com.kirayepay.KirayePay_Rikki.Fab.OnFabClickedActivity">
     <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="0.5"

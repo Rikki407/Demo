@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kirayepay.kirayepay101.AdsOfCategory.AdsByCategoryActivity">
+    tools:context="com.kirayepay.KirayePay_Rikki.AdsOfCategory.AdsByCategoryActivity">
 
     <FrameLayout
         android:id="@+id/ads_by_cat_container"

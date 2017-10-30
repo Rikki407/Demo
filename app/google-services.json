@@ -1,67 +1,48 @@
 {
   "project_info": {
-    "project_number": "61923087398",
-    "firebase_url": "https://fir-kirayepay101.firebaseio.com",
-    "project_id": "firebase-kirayepay101",
-    "storage_bucket": "firebase-kirayepay101.appspot.com"
+    "project_number": "574113075300",
+    "project_id": "kirayepayfinal"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:61923087398:android:271016ba196342fa",
+        "mobilesdk_app_id": "1:574113075300:android:b025857d5e9ef404",
         "android_client_info": {
-          "package_name": "com.kirayepay.kirayepay101"
+          "package_name": "com.kirayepay.KirayePay_Rikki"
         }
       },
       "oauth_client": [
         {
-          "client_id": "61923087398-n1amb404sr5vmnpqbd2me4jh1kd9jddi.apps.googleusercontent.com",
+          "client_id": "574113075300-k7g12qm0462s3qn1qn4oengqvnf7r4g5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kirayepay.kirayepay101",
-            "certificate_hash": "484e9d91a4982482a1ed04a04ad9448303ade8c8"
+            "package_name": "com.kirayepay.KirayePay_Rikki",
+            "certificate_hash": "964f325ca1418f4978c63aff1454af6e774a409c"
           }
         },
         {
-          "client_id": "61923087398-n0fqtjd1jujn4hqt5etfv5gg098enpe8.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "61923087398-f2a2g0tuomd3ugg48r1rv3msism7fu27.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kirayepay.kirayepay101",
-            "certificate_hash": "9fe466b3b16faf56154c728d552e1bb9e64e6ce2"
-          }
-        },
-        {
-          "client_id": "61923087398-l8c923ad8evjdudju7p7lk3i13iiqqnk.apps.googleusercontent.com",
+          "client_id": "574113075300-3ca5njnc4nclp13vrvkkql026k67pr9k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBpVc2sFC2bJHC557tv09CYhatZvnzmEMM"
+          "current_key": "AIzaSyB8ab8UxMUOro_WdgI7pU0t18Wu0f7MGnI"
         }
       ],
       "services": {
         "analytics_service": {
           "status": 2,
           "analytics_property": {
-            "tracking_id": "UA-108661690-1"
+            "tracking_id": "UA-108661690-3"
           }
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "61923087398-n0fqtjd1jujn4hqt5etfv5gg098enpe8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }
