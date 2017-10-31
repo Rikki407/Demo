@@ -79,6 +79,7 @@ public class UserAdsFragment extends Fragment
             @Override
             public void onResponse(Call<ArrayList<AdsContainments>> call, Response<ArrayList<AdsContainments>> response) {
                 if(response.isSuccessful()) {
+                    userAdsList.clear();
                     userAdsList.addAll(response.body());
                     adsAdapter.notifyDataSetChanged();
                     if(response.body().isEmpty()) no_results_found.setVisibility(View.VISIBLE);

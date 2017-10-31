@@ -105,6 +105,7 @@
             android:screenOrientation="portrait"
             />
         <activity android:name="com.kirayepay.KirayePay_Rikki.Dashboard.User_Requirements.UserRequirements"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity

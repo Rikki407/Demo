@@ -70,7 +70,7 @@ public class RequirementsAdapter extends RecyclerView.Adapter<RequirementsAdapte
         holder.reqm_till = requirementContainments.getTill();
         holder.req_desc = requirementContainments.getRequirement();
         holder.req_cat = requirementContainments.getCategory();
-        if (requirementContainments.getUser().size()>0) {
+        if (requirementContainments.getUser()!=null&&requirementContainments.getUser().size()>0) {
             holder.user_name = requirementContainments.getUser().get(0).getName();
             holder.user_email = requirementContainments.getUser().get(0).getEmail();
             holder.user_locality = requirementContainments.getUser().get(0).getLocality();
