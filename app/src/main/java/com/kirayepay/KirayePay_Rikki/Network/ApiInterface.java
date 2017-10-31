@@ -65,14 +65,14 @@ public interface ApiInterface
 
     @Multipart
     @POST("ads?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
-    Call<PostContainments> postAds(@Part("title") RequestBody title, @Part("description") RequestBody description,
+    Call<PostContainments> postAds(@Part("userid") RequestBody userid, @Part("title") RequestBody title, @Part("description") RequestBody description,
                                    @Part("parent_category") RequestBody parent_category, @Part("sub_category") RequestBody sub_category, @Part("category") RequestBody category,@Part("manufacture") RequestBody manufacture, @Part("availability") RequestBody availability,
                                             @Part("condition") RequestBody condition, @Part("quantity") RequestBody quantity, @Part("rental_option") RequestBody rental_option,
                                             @Part("rental_amount") RequestBody rental_amount,@Part("security_deposit") RequestBody security_deposit,@Part("locality") RequestBody locality,
                                             @Part("city") RequestBody city, @Part("pincode") RequestBody pincode, @Part("state") RequestBody state, @Part("district") RequestBody district, @Part("phone") RequestBody phone);
     @Multipart
     @POST("ads?api_token=VZE6G37Kx8S1n7fnQBaSsK8cAu6zyF5h1aV8OznB9gofAt9iJYoeOs3aLfHz")
-    Call<PostContainments> postAdsWithImage(@Part("title") RequestBody title, @Part("description") RequestBody description,
+    Call<PostContainments> postAdsWithImage(@Part("userid") RequestBody userid, @Part("title") RequestBody title, @Part("description") RequestBody description,
                                             @Part("parent_category") RequestBody parent_category, @Part("sub_category") RequestBody sub_category, @Part("category") RequestBody category,@Part("manufacture") RequestBody manufacture, @Part("availability") RequestBody availability,
                                             @Part("condition") RequestBody condition, @Part("quantity") RequestBody quantity, @Part("rental_option") RequestBody rental_option, @Part("rental_amount") RequestBody rental_amount,@Part("security_deposit") RequestBody security_deposit,
                                             @Part("locality") RequestBody locality, @Part("city") RequestBody city, @Part("pincode") RequestBody pincode, @Part("state") RequestBody state,

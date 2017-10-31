@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fdf4d2fa84694a797f7c05b1921c1d37f429145c"
+            />
+        <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 

@@ -4,8 +4,10 @@ import android.app.Application;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.crashlytics.android.Crashlytics;
 import com.kirayepay.KirayePay_Rikki.RikkiClasses.Acquire;
 
+import io.fabric.sdk.android.Fabric;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;

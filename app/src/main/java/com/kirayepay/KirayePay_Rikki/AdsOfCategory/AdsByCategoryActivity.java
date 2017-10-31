@@ -240,6 +240,7 @@ public class AdsByCategoryActivity extends AppCompatActivity implements View.OnC
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         Acquire.PRICE_SEEKBAR_CURR = rent_seek_progress;
         Acquire.SECURITY_SEEKBAR_CURR = deposit_seek_progress;
+        if(abc.selected_cat_pos!=-1)
         abc.adsListFragments.get(abc.selected_cat_pos).changeAccToFilter();
     }
 

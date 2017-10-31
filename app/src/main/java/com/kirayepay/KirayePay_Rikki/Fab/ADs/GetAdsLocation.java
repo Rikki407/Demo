@@ -36,7 +36,7 @@ import retrofit2.Response;
  */
 
 public class GetAdsLocation extends AppCompatActivity {
-    private String m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
+    private String user_id,m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
             sd_string, cond_string, ro_string, ra_string, desc_string, tite_string, man_string, quan_string;
     private TextView post_this_ad;
     Context mContext;
@@ -108,16 +108,18 @@ public class GetAdsLocation extends AppCompatActivity {
 
     private void setEditTexts() {
         SharedPreferences prefs = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
-        Locality.setText(prefs.getString(Acquire.LOCALITY,""));
-        City.setText(prefs.getString(Acquire.CITY,""));
-        State.setText(prefs.getString(Acquire.STATE,""));
-        District.setText(prefs.getString(Acquire.DISTRICT,""));
-        Phone.setText(prefs.getString(Acquire.PHONE,""));
-        Pincode.setText(prefs.getString(Acquire.PINCODE,""));
+        Locality.setText(prefs.getString(Acquire.LOCALITY,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        City.setText(prefs.getString(Acquire.CITY,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        State.setText(prefs.getString(Acquire.STATE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        District.setText(prefs.getString(Acquire.DISTRICT,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        Phone.setText(prefs.getString(Acquire.PHONE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        Pincode.setText(prefs.getString(Acquire.PINCODE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        user_id = prefs.getString(Acquire.USER_ID,"");
 
     }
 
     private void postTheAd() {
+        RequestBody userid = RequestBody.create(MediaType.parse("text/plain"), ""+user_id);
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ""+tite_string);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ""+desc_string);
         RequestBody category = RequestBody.create(MediaType.parse("text/plain"), ""+main_cat_id);
@@ -152,12 +154,12 @@ public class GetAdsLocation extends AppCompatActivity {
             if(sub_cat_2_id==-1) sub_cat2=null;
 
 
-            postAdCall = apiInterface.postAds(title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
+            postAdCall = apiInterface.postAds(userid,title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone);
         }
         else {
 
-            postAdCall =apiInterface.postAdsWithImage(title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
+            postAdCall =apiInterface.postAdsWithImage(userid,title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone, main_image, filename,
                     other_image_1, other_image_2, other_image_3, other_image_4);
         }
