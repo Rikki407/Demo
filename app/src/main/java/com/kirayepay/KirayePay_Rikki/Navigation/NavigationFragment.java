@@ -26,27 +26,30 @@ import com.kirayepay.KirayePay_Rikki.R;
  * Created by rikki on 8/17/17.
  */
 
-public class NavigationFragment extends Fragment
-{
+public class NavigationFragment extends Fragment {
     public BottomNavigationView navigation;
     private FloatingActionButton postButton;
+    Fragment hf = HomeFragment.newInstance();
+    Fragment alf = AllCategoriesFragment.newInstance();
+    Fragment fragment = null;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment = null;
+
             switch (item.getItemId()) {
                 case R.id.bottom_navigation_home:
-                    fragment = HomeFragment.newInstance();
+                    fragment = hf;
                     break;
                 case R.id.bottom_navigation_menu:
-                    fragment = AllCategoriesFragment.newInstance();
+                    fragment = alf;
                     break;
             }
-            if(fragment!=null) {
+            if (fragment != null) {
                 FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_contents,fragment);
+                fragmentTransaction.replace(R.id.main_contents, fragment);
                 fragmentTransaction.commit();
             }
             return true;
@@ -59,14 +62,14 @@ public class NavigationFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_navigation,container,false);
+        View v = inflater.inflate(R.layout.fragment_navigation, container, false);
         IntentFilter filter = new IntentFilter(ACTION_INTENT);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(ActivityDataReceiver, filter);
         postButton = (FloatingActionButton) v.findViewById(R.id.float_post_action_button);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),OnFabClickedActivity.class);
+                Intent intent = new Intent(getActivity(), OnFabClickedActivity.class);
                 startActivity(intent);
 
             }
@@ -78,8 +81,10 @@ public class NavigationFragment extends Fragment
         fragmentTransaction.replace(R.id.main_contents, HomeFragment.newInstance());
         fragmentTransaction.commit();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         return v;
     }
+
     @Override
     public void onDestroy() {
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(ActivityDataReceiver);
@@ -92,4 +97,19 @@ public class NavigationFragment extends Fragment
 
         }
     };
+
+    public boolean navBackPressed() {
+        if (getActivity() != null && isAdded()) {
+            if (fragment == alf) {
+                navigation.setSelectedItemId(0);
+                FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_contents, HomeFragment.newInstance());
+                fragmentTransaction.commit();
+                return true;
+            }
+
+        }
+        return false;
+    }
+
 }

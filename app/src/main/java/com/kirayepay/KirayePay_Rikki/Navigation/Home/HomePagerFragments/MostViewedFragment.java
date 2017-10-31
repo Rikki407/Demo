@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.kirayepay.KirayePay_Rikki.Navigation.NavigationFragment;
 import com.kirayepay.KirayePay_Rikki.Adapters.AdsAdapter;
@@ -86,7 +85,6 @@ public class MostViewedFragment extends Fragment
             }
             @Override
             public void onFailure(Call<ArrayList<AdsContainments>> call, Throwable t) {
-                Toast.makeText(getActivity(),"Connection Error",Toast.LENGTH_LONG).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

@@ -36,7 +36,7 @@ import retrofit2.Response;
  */
 
 public class GetAdsLocation extends AppCompatActivity {
-    private String user_id,m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
+    private String user_id,user_name,m_img_uri_str, o_img_uri_str_1, o_img_uri_str_2, o_img_uri_str_3, o_img_uri_str_4,
             sd_string, cond_string, ro_string, ra_string, desc_string, tite_string, man_string, quan_string;
     private TextView post_this_ad;
     Context mContext;
@@ -109,12 +109,13 @@ public class GetAdsLocation extends AppCompatActivity {
     private void setEditTexts() {
         SharedPreferences prefs = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
         Locality.setText(prefs.getString(Acquire.LOCALITY,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
-        City.setText(prefs.getString(Acquire.CITY,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
-        State.setText(prefs.getString(Acquire.STATE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
-        District.setText(prefs.getString(Acquire.DISTRICT,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
-        Phone.setText(prefs.getString(Acquire.PHONE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
-        Pincode.setText(prefs.getString(Acquire.PINCODE,"").equals("null") ? "" : prefs.getString(Acquire.LOCALITY,""));
+        City.setText(prefs.getString(Acquire.CITY,"").equals("null") ? "" : prefs.getString(Acquire.CITY,""));
+        State.setText(prefs.getString(Acquire.STATE,"").equals("null") ? "" : prefs.getString(Acquire.STATE,""));
+        District.setText(prefs.getString(Acquire.DISTRICT,"").equals("null") ? "" : prefs.getString(Acquire.DISTRICT,""));
+        Phone.setText(prefs.getString(Acquire.PHONE,"").equals("null") ? "" : prefs.getString(Acquire.PHONE,""));
+        Pincode.setText(prefs.getString(Acquire.PINCODE,"").equals("0") ? "" : prefs.getString(Acquire.PINCODE,""));
         user_id = prefs.getString(Acquire.USER_ID,"");
+        user_name = prefs.getString(Acquire.USER_NAME,"");
 
     }
 
@@ -153,7 +154,6 @@ public class GetAdsLocation extends AppCompatActivity {
 
             if(sub_cat_2_id==-1) sub_cat2=null;
 
-
             postAdCall = apiInterface.postAds(userid,title, description, category,sub_cat1,sub_cat2,manufacture, availability, condition, quantity,
                     rental_option,rental_amount,security_deposit,locality, city, pincode, state, district, phone);
         }
@@ -168,6 +168,7 @@ public class GetAdsLocation extends AppCompatActivity {
             @Override
             public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
                 if (response.isSuccessful()) {
+                    updateUserProfile();
                     Toast.makeText(mContext,"Ad Posted",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(mContext,MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -177,13 +178,41 @@ public class GetAdsLocation extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PostContainments> call, Throwable t) {
+                updateUserProfile();
                 Toast.makeText(mContext,"Can't Post Ad",Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
 
         });
+
     }
 
+    private void updateUserProfile()
+    {
+        int pin_code = 0;
+        if(!Pincode.getText().toString().isEmpty())
+        {
+            pin_code = Integer.parseInt(Pincode.getText().toString());
+        }
+        ApiInterface apiInterface = ApiClient.getApiInterface();
+        Call<PostContainments> updateProfileCall = apiInterface.userProfileUpdate(user_id,user_name,
+                Phone.getText().toString(),Locality.getText().toString(),City.getText().toString(),"India",
+                State.getText().toString(),District.getText().toString(),pin_code);
+
+        updateProfileCall.enqueue(new Callback<PostContainments>() {
+            @Override
+            public void onResponse(Call<PostContainments> call, Response<PostContainments> response) {
+                if(response.isSuccessful()) {
+                    SharedPreferences.Editor editor = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE).edit();
+                    editor.putString(Acquire.USER_NAME,user_name);
+                    editor.apply();
+                }
+            }
+            @Override
+            public void onFailure(Call<PostContainments> call, Throwable t) {
+            }
+        });
+    }
     @Override
     protected void onStart() {
         super.onStart();

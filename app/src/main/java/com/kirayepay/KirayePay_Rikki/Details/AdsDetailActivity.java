@@ -227,7 +227,11 @@ public class AdsDetailActivity extends AppCompatActivity implements View.OnClick
         parent_id = body.getAds().get(0).getParent_id();
         rentalOption.setText("" + body.getAds().get(0).getRental_option());
 
-        description.setText("" + body.getAds().get(0).getDescription());
+        String desc =  body.getAds().get(0).getDescription();
+        desc = desc.replaceAll("&lt;br /&gt;"," ");
+        desc = desc.replaceAll("<br />"," ");
+        description.setText(desc);
+
         condition.setText("" + body.getAds().get(0).getCondition());
         quantity.setText("" + body.getAds().get(0).getQuantity());
         availability.setText("" + body.getAds().get(0).getAvailability());
