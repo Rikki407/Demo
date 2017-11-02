@@ -254,6 +254,7 @@ public class PostRequirementsActivity extends AppCompatActivity implements View.
         int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog mDatePicker = new DatePickerDialog(PostRequirementsActivity.this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                selectedmonth++;
                 edit_text.setText("" + selectedyear + "-" + selectedmonth + "-" + selectedday);
 
                 if (edit_text.getId() == R.id.post_req_from) {

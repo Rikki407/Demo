@@ -102,9 +102,11 @@ public class NavigationFragment extends Fragment {
         if (getActivity() != null && isAdded()) {
             if (fragment == alf) {
                 navigation.setSelectedItemId(0);
+                navigation.getMenu().findItem(R.id.bottom_navigation_home).setChecked(true);
                 FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_contents, HomeFragment.newInstance());
                 fragmentTransaction.commit();
+                fragment =hf;
                 return true;
             }
 

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import com.kirayepay.KirayePay_Rikki.R;
 import com.kirayepay.KirayePay_Rikki.RikkiClasses.Acquire;
 
@@ -24,8 +23,9 @@ public class UserRequirements extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         SharedPreferences prefs = getSharedPreferences(Acquire.USER_DETAILS,MODE_PRIVATE);
 
+        String user_id = prefs.getString(Acquire.USER_ID,"");
         Bundle bundle = new Bundle();
-        bundle.putString("USER_ID",prefs.getString(Acquire.USER_ID,""));
+        bundle.putString("USER_ID",user_id);
         fragment.setArguments(bundle);
         ft.replace(R.id.user_requirements_holder,fragment).commit();
     }

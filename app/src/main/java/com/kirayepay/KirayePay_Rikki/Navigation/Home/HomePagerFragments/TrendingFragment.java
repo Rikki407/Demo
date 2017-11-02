@@ -76,6 +76,7 @@ public class TrendingFragment extends Fragment
             }
             @Override
             public void onFailure(Call<TrendingContainments> call, Throwable t) {
+                if(swipeRefreshLayout!=null)
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

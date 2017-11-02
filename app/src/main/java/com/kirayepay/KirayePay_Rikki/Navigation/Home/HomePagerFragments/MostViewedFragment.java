@@ -85,6 +85,7 @@ public class MostViewedFragment extends Fragment
             }
             @Override
             public void onFailure(Call<ArrayList<AdsContainments>> call, Throwable t) {
+                if(swipeRefreshLayout!=null)
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

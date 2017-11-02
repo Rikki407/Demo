@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.kirayepay.KirayePay_Rikki.RikkiClasses.Acquire;
 import com.kirayepay.KirayePay_Rikki.Network.ApiClient;
 import com.kirayepay.KirayePay_Rikki.Network.ApiInterface;
@@ -19,7 +18,11 @@ import com.kirayepay.KirayePay_Rikki.Network.Responses.RequirementContainments;
 import com.kirayepay.KirayePay_Rikki.R;
 import com.kirayepay.KirayePay_Rikki.Adapters.RequirementsAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,12 +39,13 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
         return new RequirementsFragment();
     }
     RecyclerView recyclerView;
-    ArrayList<RequirementContainments> mostViewedAds;
+    ArrayList<RequirementContainments> requirements;
     public RequirementsAdapter requirementsAdapter;
     public GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private LinearLayout refresh_layout;
+    Calendar calendar = Calendar.getInstance();
 
 
     @Nullable
@@ -63,8 +67,8 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"));
         swipeRefreshLayout.setColorSchemeResources(R.color.kp_red,R.color.kp_blue);
         recyclerView.setLayoutManager(gridLayoutManager);
-        mostViewedAds  = new ArrayList<>();
-        requirementsAdapter = new RequirementsAdapter(getActivity(),mostViewedAds,gridLayoutManager, Acquire.NORMAL_CALL);
+        requirements = new ArrayList<>();
+        requirementsAdapter = new RequirementsAdapter(getActivity(), requirements,gridLayoutManager, Acquire.NORMAL_CALL);
         recyclerView.setAdapter(requirementsAdapter);
         refresh_layout.setOnClickListener(this);
         fetchAllRequirements();
@@ -80,15 +84,38 @@ public class RequirementsFragment extends Fragment implements View.OnClickListen
             @Override
             public void onResponse(Call<ArrayList<RequirementContainments>> call, Response<ArrayList<RequirementContainments>> response) {
                 if(response.isSuccessful()) {
-                    mostViewedAds.clear();
-                    mostViewedAds.addAll(response.body());
+                    requirements.clear();
+                    ArrayList<RequirementContainments> req_list = new ArrayList<>();
+                    Date req_date = new Date(),curr_date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        curr_date = sdf.parse(String.valueOf(calendar.getTime()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        try {
+                            req_date = sdf.parse(response.body().get(i).getTill());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if(curr_date.compareTo(req_date) <= 0){
+                            req_list.add(response.body().get(i));
+                        }
+                    }
+
+
+                    requirements.addAll(req_list);
                     requirementsAdapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
             @Override
             public void onFailure(Call<ArrayList<RequirementContainments>> call, Throwable t) {
-                if(mostViewedAds.size()==0) refresh_layout.setVisibility(View.VISIBLE);
+                if(requirements.size()==0) refresh_layout.setVisibility(View.VISIBLE);
+                if(swipeRefreshLayout!=null)
                 swipeRefreshLayout.setRefreshing(false);
 
             }
